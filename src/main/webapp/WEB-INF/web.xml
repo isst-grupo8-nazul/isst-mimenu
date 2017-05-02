@@ -4,6 +4,15 @@
          xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
          version="2.5">
+         
+    <filter>
+		<filter-name>ObjectifyFilter</filter-name>
+		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ObjectifyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
   <servlet>
     <servlet-name>HelloAppEngine</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.HelloAppEngine</servlet-class>
@@ -22,5 +31,21 @@
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegistraRestaurante</servlet-name>
+		<servlet-class>es.upm.dit.isst.mimenu.RegistrarRestauranteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistraRestaurante</servlet-name>
+		<url-pattern>/registraRest</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegistraMenu</servlet-name>
+		<servlet-class>es.upm.dit.isst.mimenu.RegistrarMenuSevlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistraMenu</servlet-name>
+		<url-pattern>/registraMenu</url-pattern>
 	</servlet-mapping>
 </web-app>

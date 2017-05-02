@@ -50,14 +50,14 @@
 		            <ul class="nav navbar-nav navbar-right">
 
 		                <li>
-		                    <a href="/registraMenu">Publicar Menú</a>
+		                    <a href="/menus/publicar">Publicar Menú</a>
 		                </li>
 
 		                <!-- Dropdown para ver las opciones que tiene el restaurante -->
 		                <li class="dropdown">
 		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		                        <!-- Insertar el nombre del usuario -->
-		                        <c:choose><c:when test="${not empty user}"><c:out value="${rest.nombre}" /></c:when><c:otherwise>No user</c:otherwise></c:choose><span class="caret"></span>
+		                        <c:choose><c:when test="${not empty user}"><c:out value="${user}" /></c:when><c:otherwise>No user</c:otherwise></c:choose><span class="caret"></span>
 		                    </a>
 		                    <ul class="dropdown-menu">
 		                        <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
@@ -101,7 +101,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="/registraMenu">Publicar Menú</a></li>
+							<li class="active"><a href="#">Publicar Menú</a></li>
 							<li><a href="#"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis menús</a></li>
 							<li><a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
 							<li><a href="#"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
@@ -115,7 +115,7 @@
 				<div class="col-sm-3 hidden-xs">
 					<h2>Logo</h2>
 					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="/reistraMenu">Publicar Menú</a></li>
+						<li class="active"><a href="#section1">Publicar Menú</a></li>
 						<li><a href="#section2"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a></li>
 						<li><a href="#section3"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
 						<li><a href="#section3"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
@@ -126,8 +126,59 @@
 
 				<div class="col-sm-9">
 					<div class="well">
-						<h4>Bienvenido <c:out value="${rest.nombre}" /></h4>
-						<p></p>
+						<h3>Registrar Menú</h3>
+								<form action="/registraMenu" method="post" id="fileForm" role="form">
+				                    <div class="form-group">
+				                        <label >Nombre del Menú</label>
+				                        <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Primer Plato</label>
+				                        <input type="text" class="form-control" name="1plato1" placeholder="Primer plato">
+				                        <input type="text" class="form-control" name="1plato2" placeholder="Primer plato">
+				                        <input type="text" class="form-control" name="1plato3" placeholder="Primer plato">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Segundo Plato</label>
+				                        <input type="text" class="form-control" name="2plato1" placeholder="Segundo plato">
+				                        <input type="text" class="form-control" name="2plato2" placeholder="Segundo plato">
+				                        <input type="text" class="form-control" name="2plato3" placeholder="Segundo plato">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Postre</label>
+				                        <input type="text" class="form-control" name="3plato1" placeholder="Postre">
+				                        <input type="text" class="form-control" name="3plato2" placeholder="Postre">
+				                        <input type="text" class="form-control" name="3plato3" placeholder="Postre">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Precio</label>
+				                        <input type="text" class="form-control" name="precio" placeholder="Precio">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Cantidad</label>
+				                        <input type="number" class="form-control" name="cantidad" placeholder="Precio">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Fecha</label>
+				                        <input type="text" class="form-control" name="fecha" placeholder="DD/MM/AAAA">
+				                    </div> 
+				                     <div class="form-group">
+				                        <label >Turno</label>
+				                        <input type="text" class="form-control" name="turno" placeholder="Turno-HH:MM">
+				                    </div>
+				                     <div class="form-group">
+				                        <label >Categoria</label>
+				                        <input type="text" class="form-control" name="categoria" placeholder="Categoría">
+				                    </div>
+				                    <div class="form-group">
+				                        <label >Bebidas</label>
+				                        <input type="text" class="form-control" name="bebida1" placeholder="Bebida1">
+				                        <input type="text" class="form-control" name="bebida2" placeholder="Bebida2">
+				                        <input type="text" class="form-control" name="bebida3" placeholder="Bebida3">
+				                    </div>
+				                    
+				                    <button type="submit" class="btn btn-default">Publicar</button>
+				                </form>
 					</div>
 				</div>
 			</div>
