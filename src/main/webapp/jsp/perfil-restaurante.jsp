@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -5,11 +11,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>MiMenÃº</title>
+		<title>MiMenú</title>
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 		<!-- enlazo mis propios estilos -->
 		<link rel="stylesheet" type="text/css" href="./css/perfil-restaurante.css">
@@ -33,7 +39,7 @@
 		            <span class="icon-bar"></span>
 		            </button>
 
-		            <!-- Poner Logo MimenÃº -->
+		            <!-- Poner Logo Mimenú -->
 	         		<a class="navbar-brand" href="/">
 	         			<img src="./img/logo-blanco.png">
 					</a>
@@ -44,26 +50,26 @@
 		            <ul class="nav navbar-nav navbar-right">
 
 		                <li>
-		                    <a href="/menus/publicar">Publicar MenÃº</a>
+		                    <a href="/menus/publicar">Publicar Menú</a>
 		                </li>
 
 		                <!-- Dropdown para ver las opciones que tiene el restaurante -->
 		                <li class="dropdown">
 		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		                        <!-- Insertar el nombre del usuario -->
-		                        Nombre Restaurante <span class="caret"></span>
+		                        <c:choose><c:when test="${not empty user}"><c:out value="${user}" /></c:when><c:otherwise>No user</c:otherwise></c:choose><span class="caret"></span>
 		                    </a>
 		                    <ul class="dropdown-menu">
-		                        <!-- AquÃ­ iran las opciones del usuario y el botÃ³n para desconectarse -->
+		                        <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
 		                        <li>
-		                            <a href="/reservas"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis MenÃºs</a>
+		                            <a href="/reservas"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
 		                        </li>
 		                        <li>
 		                            <a href="/ajustes"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Mis Ajustes</a>
 		                        </li>
 		                        <li role="separator" class="divider"></li>
 		                        <li>
-		                            <a href="/reservas"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
+		                            <a href="<c:url value="${url}"/>"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
 		                        </li>
 		                    </ul>
 		                </li>
@@ -95,8 +101,8 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Publicar MenÃº</a></li>
-							<li><a href="#"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis menÃºs</a></li>
+							<li class="active"><a href="#">Publicar Menú</a></li>
+							<li><a href="#"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis menús</a></li>
 							<li><a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
 							<li><a href="#"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
 						</ul>
@@ -109,8 +115,8 @@
 				<div class="col-sm-3 hidden-xs">
 					<h2>Logo</h2>
 					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="#section1">Publicar MenÃº</a></li>
-						<li><a href="#section2"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis MenÃºs</a></li>
+						<li class="active"><a href="#section1">Publicar Menú</a></li>
+						<li><a href="#section2"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a></li>
 						<li><a href="#section3"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
 						<li><a href="#section3"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
 					</ul>
