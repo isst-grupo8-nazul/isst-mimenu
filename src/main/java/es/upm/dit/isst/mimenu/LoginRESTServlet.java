@@ -1,16 +1,16 @@
 package es.upm.dit.isst.mimenu;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 import com.googlecode.objectify.ObjectifyService;
 
@@ -22,6 +22,24 @@ public class LoginRESTServlet extends HttpServlet{
 	@Override
 	public void init() throws ServletException {
 		ObjectifyService.register(REST.class);
+	}
+	
+	public static String sha256(String base) {
+	    try{
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(base.getBytes("UTF-8"));
+	        StringBuffer hexString = new StringBuffer();
+
+	        for (int i = 0; i < hash.length; i++) {
+	            String hex = Integer.toHexString(0xff & hash[i]);
+	            if(hex.length() == 1) hexString.append('0');
+	            hexString.append(hex);
+	        }
+
+	        return hexString.toString();
+	    } catch(Exception ex){
+	       throw new RuntimeException(ex);
+	    }
 	}
 	
 	private static final long serialVersionUID = 1L;
@@ -44,16 +62,7 @@ public class LoginRESTServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
 			
-			MessageDigest digest;
-			String encoded ="";
-			try {
-				digest = MessageDigest.getInstance("SHA-256");
-				byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-				encoded = Base64.getEncoder().encodeToString(hash);
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String encoded = sha256(password);
 			
 			 REST rest = dao.read(email);
 			 if(rest.getPassword().equals(encoded)){
