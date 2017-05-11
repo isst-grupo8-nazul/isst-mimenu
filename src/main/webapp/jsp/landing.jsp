@@ -28,7 +28,7 @@
 	<body>
 
 		<!-- Fixed navbar Normal -->
-	    <jsp:include page="./headers/header.html"/>
+	    <jsp:include page="./headers/header.jsp"/>
 
 		<!-- Parte de la imagen de fondo con buscador -->
 		<div class="jumbotron text-center">
@@ -186,7 +186,7 @@
 
 		<!-- Parte registar tu restuarante -->
 		<div class="container resgistrar-restaurante">
-			<a class="resgistrar-restaurante text-center" href="/registrarRestaurante">
+			<a class="resgistrar-restaurante text-center" href="/hello">
 				<h1>¿QUIÉRES REGISTRAR TU RESTAURANTE?</h1>
 			</a>
 		</div>
@@ -233,8 +233,8 @@
 				</a>
 			</div>
 		</div>
-		
+
 		<!-- Parte del Footer -->
-		<jsp:include page="./footer/footer.html"/>
+		<jsp:include page="./footer/footer.jsp"/>
 	</body>
 </html>

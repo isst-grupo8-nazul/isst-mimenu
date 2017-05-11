@@ -26,7 +26,7 @@
 <body>
 
     <!-- Fixed navbar Normal -->
-	    <jsp:include page="./headers/header.html"></jsp:include>
+	    <jsp:include page="./headers/header.jsp"></jsp:include>
 
     <!-- Parte del formulario de Registro -->
     <div class="container registro-restaurante">
@@ -129,7 +129,7 @@
     </div>
 
     <!-- Parte del footer -->
-	<jsp:include page="./footer/footer.html"/>
+	<jsp:include page="./footer/footer.jsp"/>
     
 </body>
 

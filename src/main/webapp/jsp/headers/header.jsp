@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- Fixed navbar Normal -->
 	    <nav class="navbar navbar-default navbar-fixed-top">
 	      <div class="container-fluid">
@@ -10,7 +12,7 @@
 	            <span class="icon-bar"></span>
 	          </button>
 
-	          <!-- Poner Logo Mimenú -->
+	          <!-- Poner Logo MimenÃº -->
 	          <a class="navbar-brand" href="/"><img src="./img/logo-blanco.png"></a>
 	        </div>
 
@@ -29,7 +31,7 @@
 					</ul>
 				</li>
 	            <li class="active">
-	              <a href="/registrate">Regístrate</a>
+	              <a href="/registrate">RegÃ­strate</a>
 	            </li>
 	            <li>
 	              <a href="/ayuda">Ayuda</a>
