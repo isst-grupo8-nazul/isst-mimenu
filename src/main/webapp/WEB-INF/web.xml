@@ -33,6 +33,22 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>LoginREST</servlet-name>
+		<servlet-class>es.upm.dit.isst.mimenu.LoginRESTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginREST</servlet-name>
+		<url-pattern>/loginREST</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogOutREST</servlet-name>
+		<servlet-class>es.upm.dit.isst.mimenu.LogoutRESTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutREST</servlet-name>
+		<url-pattern>/logoutREST</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>RegistraRestaurante</servlet-name>
 		<servlet-class>es.upm.dit.isst.mimenu.RegistrarRestauranteServlet</servlet-class>
 	</servlet>

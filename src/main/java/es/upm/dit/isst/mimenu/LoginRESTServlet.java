@@ -71,12 +71,12 @@ public class LoginRESTServlet extends HttpServlet{
 				 view.forward(req, res);
 			 }else{
 				 req.getSession().setAttribute("messageLogin", "Password incorrecto");
-				 RequestDispatcher view = req.getRequestDispatcher("jsp/loginREST.jsp");
+				 RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
 				 view.forward(req, res);
 			 }
 		}else{
 			 req.getSession().setAttribute("messageLogin", "Usuario incorrecto");
-			 RequestDispatcher view = req.getRequestDispatcher("jsp/loginREST.jsp");
+			 RequestDispatcher view = req.getRequestDispatcher("jsp/perfil-restaurante.jsp");
 			 view.forward(req, res);
 		}
 			
