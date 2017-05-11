@@ -22,7 +22,7 @@
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>landing.html</welcome-file>
+    <welcome-file>jsp/landing.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
 		<servlet-name>Login</servlet-name>
@@ -38,7 +38,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegistraRestaurante</servlet-name>
-		<url-pattern>/registraRest</url-pattern>
+		<url-pattern>/registrarRestaurante</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RegistraMenu</servlet-name>

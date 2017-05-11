@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -11,11 +10,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>MiMen˙</title>
+		<title>MiMen√∫</title>
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 		<!-- enlazo mis propios estilos -->
 		<link rel="stylesheet" type="text/css" href="./css/perfil-restaurante.css">
@@ -39,7 +38,7 @@
 		            <span class="icon-bar"></span>
 		            </button>
 
-		            <!-- Poner Logo Mimen˙ -->
+		            <!-- Poner Logo Mimen√∫ -->
 	         		<a class="navbar-brand" href="/">
 	         			<img src="./img/logo-blanco.png">
 					</a>
@@ -50,26 +49,29 @@
 		            <ul class="nav navbar-nav navbar-right">
 
 		                <li>
-		                    <a href="/registraMenu">Publicar Men˙</a>
+		                    <a href="/menus/publicar">Publicar Men√∫</a>
 		                </li>
 
 		                <!-- Dropdown para ver las opciones que tiene el restaurante -->
 		                <li class="dropdown">
 		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		                        <!-- Insertar el nombre del usuario -->
-		                        <c:choose><c:when test="${not empty user}"><c:out value="${rest.nombre}" /></c:when><c:otherwise>No user</c:otherwise></c:choose><span class="caret"></span>
+		                        Nombre Restaurante <span class="caret"></span>
 		                    </a>
 		                    <ul class="dropdown-menu">
-		                        <!-- AquÌ iran las opciones del usuario y el botÛn para desconectarse -->
+		                        <!-- Aqu√≠ iran las opciones del usuario y el bot√≥n para desconectarse -->
 		                        <li>
-		                            <a href="/reservas"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Men˙s</a>
+		                            <a href="/reservas">
+		                            	<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
+		                            	Mis Men√∫s
+		                            </a>
 		                        </li>
 		                        <li>
 		                            <a href="/ajustes"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Mis Ajustes</a>
 		                        </li>
 		                        <li role="separator" class="divider"></li>
 		                        <li>
-		                            <a href="<c:url value="${url}"/>"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
+		                            <a href="/reservas"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
 		                        </li>
 		                    </ul>
 		                </li>
@@ -83,55 +85,133 @@
 		</nav>
 
 		<!-- Parte del perfil de restuarante -->
+
 		<div class="container perfil-restaurante">
-			<h2 class="pull-left">
-				Perfil
-			</h2>
-			<div class="clearfix"></div>
-
-			<nav class="navbar navbar-inverse visible-xs">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Logo</a>
-					</div>
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="/registraMenu">Publicar Men˙</a></li>
-							<li><a href="#"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis men˙s</a></li>
-							<li><a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
-							<li><a href="#"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
-						</ul>
+		    <div class="row profile">
+				<div class="col-md-3">
+					<div class="profile-sidebar">
+						<!-- SIDEBAR USERPIC -->
+						<div class="profile-userpic">
+							<img src="./img/teimoso.gif" class="img-responsive" alt="">
+						</div>
+						<!-- END SIDEBAR USERPIC -->
+						<!-- SIDEBAR USER TITLE -->
+						<div class="profile-usertitle">
+							<div class="profile-usertitle-name">
+								Nombre Restaurante
+							</div>
+							<div class="profile-usertitle-job">
+								Direcci√≥n
+							</div>
+						</div>
+						<!-- END SIDEBAR USER TITLE -->
+						<!-- SIDEBAR BUTTONS -->
+						<div class="profile-userbuttons">
+							<button type="button" class="btn btn-success btn-sm">Publicar Men√∫</button>
+							<button type="button" class="btn btn-danger btn-sm">Logout</button>
+						</div>
+						<!-- END SIDEBAR BUTTONS -->
+						<!-- SIDEBAR MENU -->
+						<div class="profile-usermenu">
+							<ul class="nav">
+								<li class="active">
+									<a href="#">
+										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
+										Perfil
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
+										Publicar Men√∫
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
+										Mis Men√∫s
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;
+										Mis Ajustes
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
+										Logout
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!-- END MENU -->
 					</div>
 				</div>
-			</nav>
 
-
-			<div class="row content">
-				<div class="col-sm-3 hidden-xs">
-					<h2>Logo</h2>
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="/reistraMenu">Publicar Men˙</a></li>
-						<li><a href="#section2"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Men˙s</a></li>
-						<li><a href="#section3"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Ajustes</a></li>
-						<li><a href="#section3"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a></li>
-					</ul>
-					<br>
-				</div>
-				<br>
-
-				<div class="col-sm-9">
-					<div class="well">
-						<h4>Bienvenido <c:out value="${rest.nombre}" /></h4>
-						<p></p>
-					</div>
+				<div class="col-md-9">
+		            <div class="profile-content">
+					   Some user related content goes here...
+		            </div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Parte del footer -->
+
+	    <footer>
+
+	        <!-- Primera parte con ciudades, descubre y suscripciones -->
+	        <div class="container-fluid nonavbar">
+
+	            <hr>
+	            <div class="row">
+	                <div class="col-md-4 footer-ciudades">
+	                    <h3>CIUDADES</h3>
+	                    <a href="/"><p>Madrid</p></a>
+	                    <a href="/"><p>Valencia</p></a>
+	                    <a href="/"><p>Barcelona</p></a>
+	                    <a href="/"><p>Bilbao</p></a>
+	                </div>
+	                <div class="col-md-4 footer-conoce-mimenu">
+	                    <h3>DESCUBRE MI MEN√ö</h3>
+	                    <a href="/"><p>Qui√©nes Somos</p></a>
+	                    <a href="/"><p>C√≥mo Funciona</p></a>
+	                    <a href="/"><p>Preguntas Frecuentes</p></a>
+	                    <a href="/"><p>T√©rminos y condiciones</p></a>
+	                    <a href="/"><p>Contacto</p></a>
+	                </div>
+
+	                <div class="col-md-4">
+	                    <h3>SUSCR√çBETE A NUESTRA NEWSLETTER</h3>
+	                    <div class="input-group">
+	                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
+
+	                        <div class="input-group-btn">
+	                            <button type="button" class="btn btn-success">Suscribirme</button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <hr>
+
+	            <!-- Parte del footer con iconos sociales -->
+	            <div class="row text-center">
+	                <h3>S√çGUENOS</h3>
+	                <div class="col-md-12">
+	                    <ul class="social-network social-circle">
+	                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+	                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+	                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+	                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+	                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </footer>
 
 	</body>
 </html>
