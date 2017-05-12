@@ -50,14 +50,11 @@ public class LoginServlet extends HttpServlet{
 			request.getSession().setAttribute("urlLinktext", urlLinktext);
 			request.getSession().setAttribute("rest", rest);
 			
-			RequestDispatcher view = request.getRequestDispatcher("jsp/perfil-restaurante.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			view.forward(request, response);
 		}else{
 			response.sendRedirect(url);
 		}
-
-		
-
 	}
 
 }

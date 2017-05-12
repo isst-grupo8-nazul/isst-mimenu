@@ -15,6 +15,5 @@ public class HelloAppEngine extends HttpServlet {
       
 	  RequestDispatcher view = req.getRequestDispatcher("jsp/perfil-restaurante.jsp");
 	  view.forward(req, res);
-
   }
 }

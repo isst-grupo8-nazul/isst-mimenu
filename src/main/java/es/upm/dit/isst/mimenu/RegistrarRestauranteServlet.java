@@ -18,9 +18,6 @@ import es.upm.dit.isst.mimenu.model.REST;
 
 public class RegistrarRestauranteServlet extends HttpServlet {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -49,7 +46,7 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		      throws IOException, ServletException {
 		//Pasamos el formulario de registro de un restaurante
-		RequestDispatcher view = request.getRequestDispatcher("jsp/registroRestaurante.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/registroRestaurante.jsp");
 		view.forward(request, response);
 	}
 
@@ -78,8 +75,7 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 		
 		dao.create(nombre, email, Integer.parseInt(capacidad), encoded, direccion, telefono, logo, web, 0, del);
 		
-		res.sendRedirect("/login");
-		
+		res.sendRedirect("/loginrest");
 		
 	}
 }

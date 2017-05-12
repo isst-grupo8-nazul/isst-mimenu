@@ -24,6 +24,8 @@ public class LoginRESTServlet extends HttpServlet{
 		ObjectifyService.register(REST.class);
 	}
 	
+	private static final long serialVersionUID = 1L;
+	
 	public static String sha256(String base) {
 	    try{
 	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -42,20 +44,18 @@ public class LoginRESTServlet extends HttpServlet{
 	    }
 	}
 	
-	private static final long serialVersionUID = 1L;
-	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		
-		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/loginREST.jsp");
+		boolean loginrest = true;
+		req.setAttribute("loginrest", loginrest);
+		RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
 		view.forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		
-	
 		RESTDAO dao = RESTDAOImpl.getInstancia();
 
 		if (req.getSession().getAttribute("userREST") == null){
@@ -65,9 +65,10 @@ public class LoginRESTServlet extends HttpServlet{
 			String encoded = sha256(password);
 			
 			 REST rest = dao.read(email);
+			 System.out.print(rest.getNombre());
 			 if(rest.getPassword().equals(encoded)){
 				 req.getSession().setAttribute("userREST", rest);
-				 RequestDispatcher view = req.getRequestDispatcher("jsp/perfil-restaurante.jsp");
+				 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 				 view.forward(req, res);
 			 }else{
 				 req.getSession().setAttribute("messageLogin", "Password incorrecto");
@@ -75,8 +76,9 @@ public class LoginRESTServlet extends HttpServlet{
 				 view.forward(req, res);
 			 }
 		}else{
+			
 			 req.getSession().setAttribute("messageLogin", "Usuario incorrecto");
-			 RequestDispatcher view = req.getRequestDispatcher("jsp/perfil-restaurante.jsp");
+			 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			 view.forward(req, res);
 		}
 			

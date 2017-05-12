@@ -25,7 +25,7 @@ public class RegistrarMenuSevlet extends HttpServlet {
 		      throws IOException, ServletException {
 		
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/registrarMenu.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/registrarMenu.jsp");
 		view.forward(req, res);
 	}
 	
@@ -64,7 +64,7 @@ public class RegistrarMenuSevlet extends HttpServlet {
 		
 		dao.create(null, rest, nombre, platos, Double.parseDouble(precio), Integer.parseInt(cantidad), fecha, turno, categorias, bebidas);
 		
-		res.sendRedirect("/login");
+		res.sendRedirect("/loginRest");
 	}
 
 }

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<% boolean loginrest = (Boolean) request.getAttribute("loginrest"); %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +13,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>MiMenú</title>
+		<title><c:out value="${loginrest}"/></title>
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -236,5 +239,12 @@
 
 		<!-- Parte del Footer -->
 		<jsp:include page="./footer/footer.jsp"/>
+		<c:if test="${not empty loginrest and (loginrest == true)}" >
+			<script>
+				$(document).ready(function() {
+					$("#login-modal").modal();
+				});
+			</script>
+		</c:if>
 	</body>
 </html>
