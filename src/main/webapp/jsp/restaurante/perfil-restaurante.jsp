@@ -76,12 +76,14 @@
 						<!-- END SIDEBAR USER TITLE -->
 						<!-- SIDEBAR BUTTONS -->
 						<div class="profile-userbuttons">
-							<button type="button" class="btn btn-success btn-sm">
-								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;Publicar Menú
-							</button>
-							<button type="button" class="btn btn-danger btn-sm">
-								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Logout
-							</button>
+							<a href="#" type="button" class="btn btn-success btn-sm">
+								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
+								Publicar Menú
+							</a>
+							<a href="/logoutREST" type="button" class="btn btn-danger btn-sm">
+								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
+								Logout
+							</a>
 						</div>
 						<!-- END SIDEBAR BUTTONS -->
 						<!-- SIDEBAR MENU -->
@@ -112,7 +114,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="/logoutREST">
 										<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
 										Logout
 									</a>

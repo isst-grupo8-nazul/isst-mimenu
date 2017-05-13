@@ -22,6 +22,7 @@ public class LogoutRESTServlet  extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		HttpSession session = req.getSession(false);
+		
 		if (session != null) {
 		    session.invalidate();
 		}

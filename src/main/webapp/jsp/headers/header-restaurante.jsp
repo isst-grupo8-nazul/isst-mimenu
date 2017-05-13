@@ -34,7 +34,7 @@
                                 <!-- Insertar el nombre del usuario -->
                                 ${param.nombre} <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul id="menu-rest" class="dropdown-menu">
                                 <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
                                 <li>
                                     <a href="/reservas"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
@@ -44,7 +44,7 @@
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="/logOut"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
+                                    <a href="/logoutREST"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
                                 </li>
                             </ul>
                         </li>

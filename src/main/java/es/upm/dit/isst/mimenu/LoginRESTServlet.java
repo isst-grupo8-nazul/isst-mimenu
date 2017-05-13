@@ -65,7 +65,7 @@ public class LoginRESTServlet extends HttpServlet{
 			String encoded = sha256(password);
 			
 			 REST rest = dao.read(email);
-			 System.out.print(rest.getNombre());
+			 
 			 if(rest.getPassword().equals(encoded)){
 				 req.getSession().setAttribute("userREST", rest);
 				 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
@@ -80,9 +80,6 @@ public class LoginRESTServlet extends HttpServlet{
 			 req.getSession().setAttribute("messageLogin", "Usuario incorrecto");
 			 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			 view.forward(req, res);
-		}
-			
-		
-		
+		}	
 	}
 }
