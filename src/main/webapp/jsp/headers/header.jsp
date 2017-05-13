@@ -26,7 +26,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Login
 						<span class="caret"></span>
 					</a>
-					<ul class="dropdown-menu">
+					<ul id="login-menu" class="dropdown-menu">
 						<li><a href="#">Cliente</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#login-modal">Restaurante</a></li>
 					</ul>

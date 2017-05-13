@@ -5,7 +5,11 @@
 	#5BB256 Verde
 */
 
-/*Parte del navegador de arriba*/
+/* #####################################################################
+   #
+   #   CSS para la Parte del navegador de arriba
+   #
+   ##################################################################### */
 .navbar {
     margin-bottom: 0;
     background-color: #f4511e;
@@ -38,6 +42,20 @@ nav .container-fuid {
     color: #fff !important;
 }
 
+#login-menu {
+	background-color: #f4511e !important;
+}
+
+.navbar-nav .dropdown-menu li a {
+	color: #000000;
+	background-color: #f4511e;
+}
+
+/* #####################################################################
+   #
+   #   CSS para el jumbotron y el buscador
+   #
+   ##################################################################### */
 .parametro-buscador {
 	padding: 0px;
 	background-color: #ffffff;
@@ -60,7 +78,7 @@ nav .container-fuid {
 
 /* #####################################################################
    #
-   #   Project       : Modal Login with jQuery Effects
+   #   CSS para el modal
    #
    ##################################################################### */
 
@@ -200,11 +218,11 @@ nav .container-fuid {
   border-radius: 0px;
 }
 
-.bg-grey {
-	background-color: #f6f6f6;
-}
-
-/* Css para la parte de como funciona */
+/* #####################################################################
+   #
+   #   Css para la parte de como funciona
+   #
+   ##################################################################### */
 .comofunciona-div h3 {
 	font-weight: bold;
 }
@@ -221,7 +239,11 @@ nav .container-fuid {
 	border-color: #f1f1f1;
 }
 
-/* Css para la ficha de restaurante */
+/* #####################################################################
+   #
+   #   Css para la ficha de restaurante
+   #
+   ##################################################################### */
 .destacados {
 	padding: 30px;
 }
@@ -248,7 +270,11 @@ ul.menu-opciones li {
 	max-width: 100%;
 }
 
-/* Css para la la caja de registrar de restaurante */
+/* #####################################################################
+   #
+   #   Css para la la caja de registrar de restaurante
+   #
+   ##################################################################### */
 .container.resgistrar-restaurante {
     border: 10px;
     border-color: #000000;
@@ -261,7 +287,11 @@ a.resgistrar-restaurante {
     color: #000000;
 }
 
-/*CSS para las experiencias de usuario*/
+/* #####################################################################
+   #
+   #   CSS para las experiencias de usuario
+   #
+   ##################################################################### */
 .experiencias {
 	background-color: #f6f6f6;
 }
@@ -295,7 +325,11 @@ a.resgistrar-restaurante {
 	font-style: normal;
 }
 
-/*Css para el footer*/
+/* #####################################################################
+   #
+   #   Css para el footer
+   #
+   ##################################################################### */
 footer {
 	background-color: #2d2d30;
 	color: #f5f5f5;
@@ -312,7 +346,9 @@ footer a:hover {
 	text-decoration: none;
 }
 
-/* footer social icons */
+/* #########################################
+   #    footer social icons     #
+   ######################################### */
 ul.social-network {
 	list-style: none;
 	display: inline;
@@ -323,9 +359,6 @@ ul.social-network li {
 	display: inline;
 	margin: 0 5px;
 }
-
-
-/* footer social icons */
 .social-network a.icoRss:hover {
 	background-color: #F56505;
 }

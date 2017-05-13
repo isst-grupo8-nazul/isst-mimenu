@@ -5,6 +5,11 @@
 	#5BB256 Verde
 */
 
+/* #####################################################################
+   #
+   #   CSS para la Parte del navegador de arriba
+   #
+   ##################################################################### */
 .navbar {
     margin-bottom: 0;
     background-color: #f4511e;
@@ -37,11 +42,20 @@ nav .container-fuid {
     color: #fff !important;
 }
 
-.navbar-nav .dropdown-menu li a {
-	color: #000000 .perfil-restaurante;
+#login-menu {
+  background-color: #f4511e !important;
 }
 
-/*Css para la parte de perfil*/
+.navbar-nav .dropdown-menu li a {
+	color: #000000;
+  background-color: #f4511e;
+}
+
+/* #####################################################################
+   #
+   #   Css para la parte de perfil
+   #
+   ##################################################################### */
 .perfil-restaurante {
 	padding: 100px 0px;
 }
@@ -50,12 +64,16 @@ body {
   background: #F1F3FA;
 }
 
-/* Profile container */
+/* #########################################
+   #    Profile container                  #
+   ######################################### */
 .profile {
   margin: 20px 0;
 }
 
-/* Profile sidebar */
+/* #########################################
+   #    Profile sidebar                    #
+   ######################################### */
 .profile-sidebar {
   padding: 20px 0 10px 0;
   background: #fff;
@@ -148,14 +166,20 @@ body {
   margin-left: -2px;
 }
 
-/* Profile Content */
+/* #########################################
+   #    Profile content                    #
+   ######################################### */
 .profile-content {
   padding: 20px;
   background: #fff;
   min-height: 460px;
 }
 
-/*Css para el footer*/
+/* #####################################################################
+   #
+   #   Css para el footer
+   #
+   ##################################################################### */
 footer {
 	background-color: #2d2d30;
 	color: #f5f5f5;
@@ -172,7 +196,9 @@ footer a:hover {
 	text-decoration: none;
 }
 
-/* footer social icons */
+/* #########################################
+   #    Footer social icons                #
+   ######################################### */
 ul.social-network {
 	list-style: none;
 	display: inline;
@@ -183,9 +209,6 @@ ul.social-network li {
 	display: inline;
 	margin: 0 5px;
 }
-
-
-/* footer social icons */
 .social-network a.icoRss:hover {
 	background-color: #F56505;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
         <!-- Fixed navbar Restaurante Registrado-->
         <nav class="navbar navbar-default navbar-fixed-top">
 
@@ -31,7 +32,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!-- Insertar el nombre del usuario -->
-                                Nombre Restaurante <span class="caret"></span>
+                                ${param.nombre} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->

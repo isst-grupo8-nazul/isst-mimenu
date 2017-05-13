@@ -13,9 +13,17 @@
 	REST rest = (REST) sessionOk.getAttribute("userREST");
 
 	if (rest == null) {
-		RequestDispatcher view = request.getRequestDispatcher("jsp/restuarante/registroRestaurante.jsp");
-		view.forward(request, response);
+		RequestDispatcher viewer = request.getRequestDispatcher("jsp/restuarante/registroRestaurante.jsp");
+		viewer.forward(request, response);
 	}
+
+	String nombre = rest.getNombre();
+	String email = rest.getEmail();
+	String direccion = rest.getDireccion();
+	String telefono = rest.getTelefono();
+	String web = rest.getWeb();
+	int capacidad = rest.getCapacidad();
+	String delivery = (rest.isDelivery()) ? "si":"no";
 %>
 
 <!DOCTYPE html>
@@ -25,7 +33,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>MiMenú</title>
+		<title>MIMENU - Compara y Reserva tus menús desde tu móvil</title>
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -41,7 +49,9 @@
 	<body>
 
 		<!-- Fixed navbar Restaurante Registrado-->
-		<jsp:include page="../headers/header-restaurante.jsp"/>
+		<jsp:include page="../headers/header-restaurante.jsp">
+			<jsp:param name="nombre" value="<%= nombre %>" />
+		</jsp:include>
 
 		<!-- Parte del perfil de restuarante -->
 
@@ -57,17 +67,21 @@
 						<!-- SIDEBAR USER TITLE -->
 						<div class="profile-usertitle">
 							<div class="profile-usertitle-name">
-								Nombre Restaurante
+								<%= nombre %>
 							</div>
 							<div class="profile-usertitle-job">
-								Dirección
+								<%= direccion %>
 							</div>
 						</div>
 						<!-- END SIDEBAR USER TITLE -->
 						<!-- SIDEBAR BUTTONS -->
 						<div class="profile-userbuttons">
-							<button type="button" class="btn btn-success btn-sm">Publicar Menú</button>
-							<button type="button" class="btn btn-danger btn-sm">Logout</button>
+							<button type="button" class="btn btn-success btn-sm">
+								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;Publicar Menú
+							</button>
+							<button type="button" class="btn btn-danger btn-sm">
+								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Logout
+							</button>
 						</div>
 						<!-- END SIDEBAR BUTTONS -->
 						<!-- SIDEBAR MENU -->
@@ -118,9 +132,9 @@
 
 			                <!-- Nombre del Restaurante -->
 			                <div class="form-group">
-			                    <label class="col-md-4 control-label" for="usuario">Restaurante</label>
+			                    <label class="col-md-4 control-label" for="usuario">Nombre</label>
 			                    <div class="col-md-4">
-			                        <input id="usuario" name="nombre" type="text" placeholder='<c:out value="${rest.nombre}"/>' class="form-control input-md" required>
+			                        <input id="usuario" name="nombre" type="text" value="<%= nombre %>" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -128,7 +142,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="password">Password</label>
 			                    <div class="col-md-4">
-			                        <input id="password" name="password" type="password" placeholder="Contraseña" class="form-control input-md" required>
+			                        <input id="password" name="password" type="password" value="Contraseña" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -136,7 +150,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="email">Email</label>
 			                    <div class="col-md-4">
-			                        <input id="email" name="email" type="email" placeholder="Email" class="form-control input-md" required>
+			                        <input id="email" name="email" type="email" value="<%= email %>" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -152,7 +166,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="capacidad">Capacidad</label>
 			                    <div class="col-md-2">
-			                        <input id="capacidad" name="capacidad" type="number" placeholder="Introduce a capacidad de tu restaurante" class="form-control input-md" required>
+			                        <input id="capacidad" name="capacidad" type="number" value="<%= capacidad %>" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -160,7 +174,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="direccion">Dirección:</label>
 			                    <div class="col-md-4">
-			                        <input id="direccion" name="direccion" type="text" placeholder="Dirección de tu restaurante" class="form-control input-md" required>
+			                        <input id="direccion" name="direccion" type="text" value="<%= direccion %>" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -168,7 +182,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="telefono">Teléfono</label>
 			                    <div class="col-md-4">
-			                        <input id="telefono" name="telefono" type="number" placeholder="Teléfono de Contacto" class="form-control input-md" required>
+			                        <input id="telefono" name="telefono" type="number" value="<%= telefono %>" class="form-control input-md" required>
 			                    </div>
 			                </div>
 
@@ -176,14 +190,15 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="web">Web</label>
 			                    <div class="col-md-4">
-			                        <input id="web" name="web" type="text" placeholder="Web de tu restaurante" class="form-control input-md">
+			                        <input id="web" name="web" type="text" value="<%= web %>" class="form-control input-md">
 			                    </div>
 			                </div>
 
 			                <!-- Delivery -->
 			                <div class="form-group">
-			                    <label class="col-md-4 control-label" for="delivery">¿Hacéis envíos a Domicilio?</label>
+			                    <label class="col-md-4 control-label" for="delivery">Envíos a Domicilio</label>
 			                    <div class="col-md-4">
+			                    <% if (delivery == "si") { %>
 			                        <div class="radio">
 			                            <label for="delivery-0">
 			                                <input type="radio" name="delivery" id="delivery-0" value="si" checked="checked">
@@ -196,12 +211,26 @@
 			                                No
 			                            </label>
 			                        </div>
+			                    <%} else { %>
+			                    	<div class="radio">
+			                            <label for="delivery-0">
+			                                <input type="radio" name="delivery" id="delivery-0" value="si">
+			                                Sí
+			                            </label>
+			                        </div>
+			                        <div class="radio">
+			                            <label for="delivery-1">
+			                                <input type="radio" name="delivery" id="delivery-1" value="no" checked="checked">
+			                                No
+			                            </label>
+			                        </div>
+			                    <% } %>
 			                    </div>
 			                </div>
 
-			                <!-- Button Registrarme -->
+			                <!-- Button Actualizar -->
 			                <div class="col-md-12 text-center">
-			                    <input type="submit" value="Registrarme" class="btn btn-success">
+			                    <input type="submit" value="Actualizar" class="btn btn-success">
 			                </div>
 			            </fieldset>
 			        </form>
