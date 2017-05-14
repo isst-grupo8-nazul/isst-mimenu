@@ -76,7 +76,7 @@
 						<!-- END SIDEBAR USER TITLE -->
 						<!-- SIDEBAR BUTTONS -->
 						<div class="profile-userbuttons">
-							<a href="#" type="button" class="btn btn-success btn-sm">
+							<a href="/registraMenu" type="button" class="btn btn-success btn-sm">
 								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 								Publicar Menú
 							</a>
@@ -96,7 +96,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="/registraMenu">
 										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 										Publicar Menú
 									</a>
