@@ -34,10 +34,10 @@ public class MENUDAOImpl implements MENUDAO {
 	 * @see es.upm.dit.isst.mimenu.dao.MENUDAO#create(int, java.lang.String, java.lang.String[], double, int, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[])
 	 */
 	@Override
-	public MENU create(Long id, REST rest , String nombre, String[][] platos, double precio, int cantidad, String fecha, String turno,
-			String[] categorias, String[] bebidas) {
+	public MENU create(Long id, String restEmail , String nombre, double precio, int cantidad, String fecha, String turno,
+			String categorias, String[] bebidas) {
 		
-		MENU menu = new MENU(id, rest, nombre, platos, precio, cantidad, fecha, turno, categorias, bebidas);
+		MENU menu = new MENU(id, restEmail, nombre, precio, cantidad, fecha, turno, categorias, bebidas);
 		ofy().save().entity(menu).now();
 		
 		return menu;
@@ -63,8 +63,8 @@ public class MENUDAOImpl implements MENUDAO {
 		return menus;
 	}
 	
-	public List<MENU> readByRest(REST rest){
-		List<MENU> menus = ofy().load().type(MENU.class).filter("rest", rest).list();
+	public List<MENU> readByRest(String restEmail){
+		List<MENU> menus = ofy().load().type(MENU.class).filter("rest", restEmail).list();
 		return menus;
 	}
 
@@ -124,7 +124,7 @@ public class MENUDAOImpl implements MENUDAO {
 	@Override
 	public List<MENU> readByCategoria(String categoria) {
 		
-		List<MENU> menus= ofy().load().type(MENU.class).filter("cateegoria", categoria).list();
+		List<MENU> menus= ofy().load().type(MENU.class).filter("categoria", categoria).list();
 		return menus;
 	}
 

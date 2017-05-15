@@ -52,7 +52,7 @@
 		  		
   		<script type='text/javascript'>
 	        var add = (function () {
-	            var counter = 0;
+	            var counter = 1;
 	            return function () {return counter += 1;}
 	        })();
 	
@@ -63,17 +63,17 @@
 	            var i = add();
 	            var str = '<div class="form-group col-sm-12 col-md-12 col-lg-12 col-lg-12">\
 	                                <div class="col-sm-5 col-md-5 col-lg-5 col-lg-5">\
-	                                    <input id="nombrePlato" name="platos['+i+'][nombrePlato]" type="text" placeholder="Nombre del plato" class="form-control input-md" required>\
+	                                    <input id="nombrePlato" name="plato'+i+'" type="text" placeholder="Nombre del plato" class="form-control input-md" required>\
 	                                </div>\
 	                                <div class="col-sm-4 col-md-4 col-lg-4 col-lg-4">\
-	                                    <select name="platos['+i+'][tipo]" class="form-control">\
+	                                    <select name="plato'+i+'" class="form-control">\
 	                                        <option value="primero">Primero</option>\
 	                                        <option value="segundo">Segundo</option>\
 	                                        <option value="postre">Postre</option>\
 	                                     </select>\
 	                                </div>\
 	                                <div class="col-sm-3 col-md-3 col-lg-3 col-lg-3">\
-	                                    <select name="platos['+i+'][categoria]" class="form-control">\
+	                                    <select name="plato'+i+'" class="form-control">\
 	                                        <option value="italiano">Italiano</option>\
 	                                        <option value="chino">Chino</option>\
 	                                        <option value="hindu">Hindú</option>\
@@ -88,9 +88,11 @@
 	            // Container <div> where dynamic content will be placed
 	            var container = document.getElementById("container");
 	            
-	                container.appendChild(child);
-	                
+	            container.appendChild(child);
+	            document.getElementById("contador").value = i;
 	        }
+	        
+	        
 	    </script>
 
 	</head>
@@ -195,19 +197,20 @@
 			                </div>
 
 			                <div id="container" class="form-group col-sm-12 col-md-12 col-lg-12 col-lg-12">
+			                	<input type="hidden" name="contador" id="contador" value="1"/>
 			                	<div class="form-group col-sm-12 col-md-12 col-lg-12 col-lg-12">
 				                    <div class="col-sm-5 col-md-5 col-lg-5 col-lg-5">
-				                        <input id="nombrePlato" name="platos[0][nombrePlato]" type="text" placeholder="Nombre del plato" class="form-control input-md" required>
+				                        <input id="nombrePlato" name="plato1" type="text" placeholder="Nombre del plato" class="form-control input-md" required>
 				                    </div>
 				                    <div class="col-sm-4 col-md-4 col-lg-4 col-lg-4">
-				                    	<select name="platos[0][tipo]" class="form-control">
+				                    	<select name="plato1" class="form-control">
 										    <option value="primero">Primero</option>
 										    <option value="segundo">Segundo</option>
 										    <option value="postre">Postre</option>
 										 </select>
 				                    </div>
 				                    <div class="col-sm-3 col-md-3 col-lg-3 col-lg-3">
-				                    	<select name="platos[0][categoria]" class="form-control">
+				                    	<select name="plato1" class="form-control">
 										    <option value="italiano">Italiano</option>
 										    <option value="chino">Chino</option>
 										    <option value="hindu">Hindú</option>

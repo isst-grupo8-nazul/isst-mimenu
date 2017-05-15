@@ -1,0 +1,54 @@
+package es.upm.dit.isst.mimenu.dao;
+
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import java.util.List;
+
+import es.upm.dit.isst.mimenu.model.PLATO;
+
+public class PLATODAOImpl implements PLATODAO {
+
+	private static PLATODAOImpl instancia;
+	
+	private PLATODAOImpl() {
+		
+	}
+	
+	public static PLATODAOImpl getInstancia() {
+		if (instancia == null)
+			instancia= new PLATODAOImpl();
+		return instancia;
+	}
+	
+	@Override
+	public PLATO create(Long id, Long menuId, String nombre, String tipo, String categoria) {
+		PLATO plato = new PLATO(id, menuId, nombre, tipo, categoria);
+		ofy().save().entity(plato).now();
+		return plato;
+	}
+
+	@Override
+	public List<PLATO> readByMenu(Long menuId) {
+			List<PLATO> plato = ofy().load().type(PLATO.class).filter("menuId", menuId).list();
+			return plato;
+	}
+
+	@Override
+	public List<PLATO> read() {
+		List<PLATO> platos = ofy().load().type(PLATO.class).list();
+		return platos;
+	}
+
+	@Override
+	public PLATO updatePLATO(PLATO plato) {
+		ofy().save().entity(plato).now();
+		return plato;
+	}
+
+	@Override
+	public PLATO deletePLATO(PLATO plato) {
+		ofy().delete().entity(plato).now();
+		return plato;
+	}
+
+}
