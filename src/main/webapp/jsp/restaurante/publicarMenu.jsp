@@ -153,13 +153,13 @@
 									</a>
 								</li>
 								<li>
-									<a href="#" target="_blank">
+									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Menús
 									</a>
 								</li>
 								<li>
-									<a href="#" target="_blank">
+									<a href="#">
 										<i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Ajustes
 									</a>

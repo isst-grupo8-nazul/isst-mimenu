@@ -52,27 +52,25 @@ public class RegistrarMenuSevlet extends HttpServlet {
 			String turno = req.getParameter("turno");
 			String categorias = req.getParameter("categoria");
 			
-			System.out.println(nombre + " " + precio + " " + cantidad+ " "+ fecha + " " + turno + " " +categorias);
-			
 			REST rest = (REST) req.getSession().getAttribute("userREST");
 			
-			System.out.println(rest.getNombre());
+			String[] bebidas= {"Agua", "Coca-Cola", "Fanta"};
 			
-			MENU menu = menuDao.create(null, rest.getEmail(), nombre, precio, cantidad, fecha, turno, categorias, null);
+			
+			MENU menu = menuDao.create(null, rest.getEmail(), nombre, precio, cantidad, fecha, turno, categorias, bebidas);
 			
 			int contador = Integer.parseInt(req.getParameter("contador"));
 			
-			System.out.println(contador);
-				
+			
 			for(int i=1;i<=contador;i++){
 				String[] plato = req.getParameterValues("plato"+i);
-				platosDao.create(null, menu.getId(), plato[0], plato[1], plato[2]);
+				platosDao.create(null, menu.getId(), rest.getEmail(), plato[0], plato[1], plato[2]);
 			}
 			
-			res.sendRedirect("/loginrest");
+			res.sendRedirect("/showMenusRest");
 
 		}else{
-			res.sendRedirect("/");
+			res.sendRedirect("/loginrest");
 		}
 		
 		

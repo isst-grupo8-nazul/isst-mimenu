@@ -16,6 +16,9 @@ public class PLATO implements Serializable {
 	@Index
 	private Long menuId;
 	
+	@Index
+	private String restEmail;
+	
 	private String nombre;
 	private String tipo;
 	private String categoria;
@@ -23,16 +26,40 @@ public class PLATO implements Serializable {
 	public PLATO(){}
 	
 	
-	
-	public PLATO(Long id, Long menuId, String nombre, String tipo, String categoria) {
+	public PLATO(Long id, Long menuId, String restEmail, String nombre, String tipo, String categoria) {
 		super();
 		this.id = id;
 		this.menuId = menuId;
+		this.restEmail = restEmail;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.categoria = categoria;
 	}
 
+
+	public Long getMenuId() {
+		return menuId;
+	}
+
+
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
+	}
+
+
+	public String getRestEmail() {
+		return restEmail;
+	}
+
+
+	public void setRestEmail(String restEmail) {
+		this.restEmail = restEmail;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 
 	public Long getId() {

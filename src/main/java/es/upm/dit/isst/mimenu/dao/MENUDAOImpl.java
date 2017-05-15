@@ -64,7 +64,7 @@ public class MENUDAOImpl implements MENUDAO {
 	}
 	
 	public List<MENU> readByRest(String restEmail){
-		List<MENU> menus = ofy().load().type(MENU.class).filter("rest", restEmail).list();
+		List<MENU> menus = ofy().load().type(MENU.class).filter("restEmail", restEmail).list();
 		return menus;
 	}
 

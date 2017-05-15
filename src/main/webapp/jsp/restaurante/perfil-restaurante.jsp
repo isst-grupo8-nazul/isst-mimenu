@@ -6,6 +6,7 @@
 
 <%@ page import="es.upm.dit.isst.mimenu.model.REST" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
+<%@ page import="es.upm.dit.isst.mimenu.model.PLATO" %>
 
 <%
 	HttpSession sessionOk = request.getSession();
@@ -102,7 +103,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#" target="_blank">
+									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Menús
 									</a>

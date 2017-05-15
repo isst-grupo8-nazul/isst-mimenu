@@ -21,8 +21,8 @@ public class PLATODAOImpl implements PLATODAO {
 	}
 	
 	@Override
-	public PLATO create(Long id, Long menuId, String nombre, String tipo, String categoria) {
-		PLATO plato = new PLATO(id, menuId, nombre, tipo, categoria);
+	public PLATO create(Long id, Long menuId, String restEmail, String nombre, String tipo, String categoria) {
+		PLATO plato = new PLATO(id, menuId, restEmail, nombre, tipo, categoria);
 		ofy().save().entity(plato).now();
 		return plato;
 	}
@@ -48,6 +48,10 @@ public class PLATODAOImpl implements PLATODAO {
 	@Override
 	public PLATO deletePLATO(PLATO plato) {
 		ofy().delete().entity(plato).now();
+		return plato;
+	}
+	public List<PLATO> readByREST(String restEmail){
+		List<PLATO> plato = ofy().load().type(PLATO.class).filter("restEmail", restEmail).list();
 		return plato;
 	}
 

@@ -77,5 +77,15 @@
 		<servlet-name>RegistraMenu</servlet-name>
 		<url-pattern>/registraMenu</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Servlet para ver un MENU -->
+	<servlet>
+		<servlet-name>ShowMenusREST</servlet-name>
+		<servlet-class>es.upm.dit.isst.mimenu.ShowMenusRESTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowMenusREST</servlet-name>
+		<url-pattern>/showMenusRest</url-pattern>
+	</servlet-mapping>
 
 </web-app>
