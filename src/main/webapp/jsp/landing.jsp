@@ -3,8 +3,17 @@
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="es.upm.dit.isst.mimenu.model.REST" %>
+<%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
 
 <% boolean loginrest = (Boolean) request.getAttribute("loginrest"); %>
+<%
+	HttpSession sessionOk = request.getSession();
+
+	REST rest = (REST) sessionOk.getAttribute("userREST");
+	String comensal = null; 
+// 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");	
+%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +22,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title><c:out value="${loginrest}"/></title>
+		<title>MiMenú - Tu web para reservar tus menús al mejor precio.</title>
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,8 +40,23 @@
 	<body>
 
 		<!-- Fixed navbar Normal -->
-	    <jsp:include page="./headers/header.jsp"/>
-
+		<% if (rest != null) {
+			String nombreRest = rest.getNombre();
+			String emailRest = rest.getEmail();
+			String direccionRest = rest.getDireccion();
+			String telefonoRest = rest.getTelefono();
+			String webRest = rest.getWeb();
+			int capacidadRest = rest.getCapacidad();
+			String deliveryRest = (rest.isDelivery()) ? "si":"no";	
+		%>
+	    	<jsp:include page="./headers/header-restaurante.jsp">
+	    		<jsp:param name="nombre" value="<%= nombreRest %>" />
+	    	</jsp:include>
+	    <% } else if ( comensal != null) { %>
+			<jsp:include page="./headers/header-usuario.jsp"/>
+		<% } else { %>
+			<jsp:include page="./headers/header.jsp"/>
+		<% } %>
 		<!-- Parte de la imagen de fondo con buscador -->
 		<div class="jumbotron text-center">
 			<h1> Reserva tu Menú </h1>
@@ -40,7 +64,7 @@
 			<form action="/buscar" method="POST" class="form-inline">
 
 				<div class="input-group">
-					<input type="email" class="form-control" size="50" id="" placeholder="Email" required>
+					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" required>
 
 					<div class="input-group-addon parametro-buscador">
 						<input type="date" name="fecha" placeholder="Fecha" required>
@@ -189,7 +213,7 @@
 
 		<!-- Parte registar tu restuarante -->
 		<div class="container resgistrar-restaurante">
-			<a class="resgistrar-restaurante text-center" href="/hello">
+			<a class="resgistrar-restaurante text-center" href="/registrarRestaurante">
 				<h1>¿QUIÉRES REGISTRAR TU RESTAURANTE?</h1>
 			</a>
 		</div>

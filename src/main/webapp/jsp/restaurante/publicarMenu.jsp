@@ -141,13 +141,13 @@
 						<div class="profile-usermenu">
 							<ul class="nav">
 								<li>
-									<a href="#">
+									<a href="/loginrest">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Perfil
 									</a>
 								</li>
 								<li class="active">
-									<a href="#">
+									<a href="/registramenu">
 										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 										Publicar Menú
 									</a>
@@ -160,8 +160,8 @@
 								</li>
 								<li>
 									<a href="#">
-										<i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;
-										Mis Ajustes
+										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
+										Ver comentarios
 									</a>
 								</li>
 								<li>

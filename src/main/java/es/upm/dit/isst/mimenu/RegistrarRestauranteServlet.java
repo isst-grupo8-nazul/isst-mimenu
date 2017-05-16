@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.ObjectifyService;
 
@@ -45,37 +46,52 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		      throws IOException, ServletException {
-		//Pasamos el formulario de registro de un restaurante
-		RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/registroRestaurante.jsp");
-		view.forward(request, response);
+		
+		HttpSession sessionOk = request.getSession();
+		REST rest = (REST) sessionOk.getAttribute("userREST");
+		
+		if (rest != null) {
+			response.sendRedirect("/loginrest");
+		} else {
+			//Pasamos el formulario de registro de un restaurante
+			RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/registroRestaurante.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String email = req.getParameter("email");
 		
-		String nombre = req.getParameter("nombre");
+		HttpSession sessionOk = req.getSession();
+		REST rest = (REST) sessionOk.getAttribute("userREST");
 		
-		String capacidad = req.getParameter("capacidad");
-		String password = req.getParameter("password");
-		
-		String encoded = sha256(password);
-		
-		String direccion = req.getParameter("direccion");
-		String telefono = req.getParameter("telefono");
-		//String logo = req.getParameter("logo-restaurante");
-		String logo = "";
-		String web = req.getParameter("web");
-		String delivery = req.getParameter("delivery");
-		Boolean del = false;
-		if(delivery.equals("si")){
-			del = true;
+		if (rest != null) {
+			res.sendRedirect("/loginrest");
+		} else {
+			String email = req.getParameter("email");
+			
+			String nombre = req.getParameter("nombre");
+			
+			String capacidad = req.getParameter("capacidad");
+			String password = req.getParameter("password");
+			
+			String encoded = sha256(password);
+			
+			String direccion = req.getParameter("direccion");
+			String telefono = req.getParameter("telefono");
+			//String logo = req.getParameter("logo-restaurante");
+			String logo = "";
+			String web = req.getParameter("web");
+			String delivery = req.getParameter("delivery");
+			Boolean del = false;
+			if(delivery.equals("si")){
+				del = true;
+			}
+			
+			RESTDAO dao = RESTDAOImpl.getInstancia();
+			
+			dao.create(nombre, email, Integer.parseInt(capacidad), encoded, direccion, telefono, logo, web, 0, del);
+			
+			res.sendRedirect("/loginrest");
 		}
-		
-		RESTDAO dao = RESTDAOImpl.getInstancia();
-		
-		dao.create(nombre, email, Integer.parseInt(capacidad), encoded, direccion, telefono, logo, web, 0, del);
-		
-		res.sendRedirect("/loginrest");
-		
 	}
 }

@@ -48,12 +48,12 @@
 		<link rel="stylesheet" type="text/css" href="../../css/perfil-restaurante.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		
+
   		<style>
 			#showMenus ul {
 			    list-style-type: none;
 			    margin: 0px;
-			    padding: 10px;
+			    padding: 10px 10px 0px 0px;
 			}
 			#showMenus .tags a{text-decoration: none; border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
 			#showMenus .tags a.success{text-decoration: none; color:#FFF;background-color:#5CB85C;border-color:#4CAE4C}
@@ -104,7 +104,7 @@
 						<!-- SIDEBAR MENU -->
 						<div class="profile-usermenu">
 							<ul class="nav">
-								<li class="active">
+								<li>
 									<a href="/loginrest">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Perfil
@@ -116,7 +116,7 @@
 										Publicar Menú
 									</a>
 								</li>
-								<li>
+								<li class="active">
 									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Menús
@@ -124,8 +124,8 @@
 								</li>
 								<li>
 									<a href="#">
-										<i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;
-										Mis Ajustes
+										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
+										Ver Comentarios
 									</a>
 								</li>
 								<li>
@@ -143,54 +143,83 @@
 				<div id="showMenus" class="col-sm-9">
 				<% if(!menus.isEmpty()){
 					for(MENU menu : menus){ %>
-					<div class="panel panel-default">
-					  <div class="panel-body">
-					  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					  		<span><h3><%= menu.getNombre() %></h3></span><span class="label label-info"><span class="glyphicon glyphicon-tag"></span><%= menu.getCategorias() %></span>
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3>
+								<strong><%= menu.getNombre() %></strong>
+								<span class="label label-info">
+									<span class="glyphicon glyphicon-tag"></span> <%= menu.getCategorias() %>
+								</span>
+							</h3>
+						</div>
+					  	<div class="panel-body">
+						  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						  		<h4><strong>Primeros</strong></h4>
+						  		<ul>
+						  			<% for(PLATO plato : platos) {
+						  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("primero")){%>
+						  				<li>
+						  					<%=plato.getNombre() %>
+						  					<span class="label label-info pull-right">
+						  						<span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %>
+						  					</span>
+						  				</li>
+						  			<% }} %>
+						  		</ul>
+						  	</div>
+						  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						  		<h4><strong>Segundos</strong></h4>
+						  		<ul>
+						  			<% for(PLATO plato : platos) {
+						  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("segundo")){%>
+						  				<li>
+						  					<%=plato.getNombre() %>
+						  					<span class="label label-info pull-right">
+						  						<span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %>
+						  					</span>
+						  				</li>
+						  			<% }} %>
+						  		</ul>
+						  	</div>
+						  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						  		<h4><strong>Postres</strong></h4>
+						  		<ul>
+						  			<% for(PLATO plato : platos) {
+						  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("postre")){%>
+						  				<li>
+						  					<%=plato.getNombre() %>
+						  					<span class="label label-info pull-right">
+						  						<span class="glyphicon glyphicon-tag"></span> <%=plato.getCategoria() %>
+						  					</span>
+						  				</li>
+						  			<% }} %>
+						  		</ul>
+						  	</div>
+						  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						  		<h4><strong>Bebidas</strong></h4>
+						  		<ul>
+						  			<% for(String bebida : menu.getBebidas()){%>
+						  				<li>
+						  					<%= bebida %>
+						  				</li>
+						  			<% } %>
+						  		</ul>
+						  	</div>
+					  		<div class="tags col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					  			<a href="#" onclick="event.preventDefault();" class="success">
+					  				<%= menu.getPrecio() %> <i class="fa fa-eur" aria-hidden="true"></i>
+					  			</a>
+					  			<a href="#" onclick="event.preventDefault();">
+					  				<%= menu.getCantidad() %> uds.
+					  			</a>
+					  			<a href="#" onclick="event.preventDefault();">
+					  				<%= menu.getFecha() %>
+					  			</a>
+					  			<a href="#" onclick="event.preventDefault();">
+					  				<%= menu.getTurno() %>
+					  			</a>
+					  		</div>
 					  	</div>
-					  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-					  		<h4>Primeros</h4>
-					  		<ul>
-					  			<% for(PLATO plato : platos) {
-					  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("primero")){%>
-					  				<li><%=plato.getNombre() %> <span class="label label-info"><span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %></span></li>
-					  			<% }} %>
-					  		</ul>
-					  	</div>
-					  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-					  		<h4>Segundos</h4>
-					  		<ul>
-					  			<% for(PLATO plato : platos) {
-					  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("segundo")){%>
-					  				<li><%=plato.getNombre() %> <span class="label label-info"><span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %></span></li>
-					  			<% }} %>
-					  		</ul>
-					  	</div>
-					  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-					  		<h4>Postres</h4>
-					  		<ul>
-					  			<% for(PLATO plato : platos) {
-					  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("postre")){%>
-					  				<li><%=plato.getNombre() %> <span class="label label-info"><span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %></span></li>
-					  			<% }} %>
-					  		</ul>
-					  	</div>
-					  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-					  		<h4>Bebidas</h4>
-					  		<ul>
-					  			<% for(String bebida : menu.getBebidas()){%>
-					  				<li><%= bebida %></li>
-					  			<% } %>
-					  			
-					  		</ul>
-					  	</div>
-					  	<div class="tags col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					  			<a href="#" onclick="event.preventDefault();" class="success"><%= menu.getPrecio() %> €</a>
-					  			<a href="#" onclick="event.preventDefault();"><%= menu.getCantidad() %> uds.</a>
-					  			<a href="#" onclick="event.preventDefault();"><%= menu.getFecha() %></a>				  		
-					  			<a href="#" onclick="event.preventDefault();"><%= menu.getTurno() %></a>
-					  	</div>
-					  </div>
 					</div>
 				<% } }else{%>
 					<p>No has publicado menús por ahora</p>

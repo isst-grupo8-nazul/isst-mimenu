@@ -90,31 +90,31 @@
 						<!-- SIDEBAR MENU -->
 						<div class="profile-usermenu">
 							<ul class="nav">
-								<li class="active">
-									<a href="#">
+								<li id="perfil" class="active">
+									<a href="/loginrest">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Perfil
 									</a>
 								</li>
-								<li>
+								<li id="publicar-menu">
 									<a href="/registraMenu">
 										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 										Publicar Menú
 									</a>
 								</li>
-								<li>
+								<li id="mis-menus">
 									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Menús
 									</a>
 								</li>
-								<li>
+								<li id="mis-ajustes">
 									<a href="#" target="_blank">
-										<i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;
-										Mis Ajustes
+										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
+										Ver comentarios
 									</a>
 								</li>
-								<li>
+								<li id="logout">
 									<a href="/logoutREST">
 										<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
 										Logout
@@ -243,5 +243,22 @@
 
 		<!-- Parte del footer -->
 		<jsp:include page="../footer/footer.jsp"/>
+	<script>
+		$(function(){
+		
+			$('#slide-submenu').on('click',function() {			        
+		        $(this).closest('.list-group').fadeOut('slide',function(){
+		        	$('.mini-submenu').fadeIn();	
+		        });
+		        
+		      });
+		
+			$('.mini-submenu').on('click',function(){		
+		        $(this).next('.list-group').toggle('slide');
+		        $('.mini-submenu').hide();
+			})
+		})
+
+	</script>
 	</body>
 </html>
