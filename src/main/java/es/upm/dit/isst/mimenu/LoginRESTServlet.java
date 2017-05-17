@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.ObjectifyService;
 
+import es.upm.dit.isst.mimenu.dao.COMENSALDAO;
+import es.upm.dit.isst.mimenu.dao.COMENSALDAOImpl;
 import es.upm.dit.isst.mimenu.dao.RESTDAO;
 import es.upm.dit.isst.mimenu.dao.RESTDAOImpl;
+import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.REST;
 
 public class LoginRESTServlet extends HttpServlet{
@@ -69,23 +72,26 @@ public class LoginRESTServlet extends HttpServlet{
 		
 		HttpSession sessionOk = req.getSession();
 		REST restSession = (REST) sessionOk.getAttribute("userREST");
+		COMENSAL comensalSession=(COMENSAL) sessionOk.getAttribute("userCOMENSAL");
 		
-		if (restSession != null) {
+		if (restSession != null || comensalSession != null) {
 			
 			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			view.forward(req, res);
 			
 		} else {
 			
-			RESTDAO dao = RESTDAOImpl.getInstancia();
+			RESTDAO restDao = RESTDAOImpl.getInstancia();
+			COMENSALDAO comensalDao = COMENSALDAOImpl.getInstancia();
 
-			if (req.getSession().getAttribute("userREST") == null){
+			if (req.getSession().getAttribute("userREST") == null && req.getSession().getAttribute("userCOMENSAL") == null){
 				String email = req.getParameter("email");
 				String password = req.getParameter("password");
 				
 				String encoded = sha256(password);
 				
-				 REST rest = dao.read(email);
+				 REST rest = restDao.read(email);
+				 COMENSAL comensal = comensalDao.read(email);
 				 
 				 if(rest.getPassword().equals(encoded)){
 					 req.getSession().setAttribute("userREST", rest);
