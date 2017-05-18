@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,14 +19,7 @@ import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.REST;
 
-public class ShowMenusRESTServlet extends HttpServlet {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
+public class ShowMenusCOMENSALServlet {
 	public void init() throws ServletException {
 		ObjectifyService.register(REST.class);
 		ObjectifyService.register(COMENSAL.class);
@@ -35,29 +27,27 @@ public class ShowMenusRESTServlet extends HttpServlet {
 		ObjectifyService.register(PLATO.class);
 	}
 	
-	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		
-		REST rest = (REST) req.getSession().getAttribute("userREST");
+		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
 		
-		if (rest != null){
+		if (comensal != null){
 			
 			MENUDAO menuDao = MENUDAOImpl.getInstancia();
 			PLATODAO platosDao = PLATODAOImpl.getInstancia();
 			
-			List<MENU> menus = menuDao.readByRest(rest.getEmail());
-			List<PLATO> platos = platosDao.readByREST(rest.getEmail());
+			List<MENU> menus = menuDao.read();
+			List<PLATO> platos = platosDao.read();
 			
 					
-			req.getSession().setAttribute("menusREST", menus);
-			req.getSession().setAttribute("platosREST", platos);
+			req.getSession().setAttribute("menusCOMENSAL", menus);
+			req.getSession().setAttribute("platosCOMENSAL", platos);
 		
-			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/showMenus.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/showMenusComensal.jsp");
 			view.forward(req, res);
 		}else{
 			res.sendRedirect("/login");
 		}
 	}
-
 }

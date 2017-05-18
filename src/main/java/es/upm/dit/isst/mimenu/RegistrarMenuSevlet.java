@@ -15,6 +15,7 @@ import es.upm.dit.isst.mimenu.dao.MENUDAO;
 import es.upm.dit.isst.mimenu.dao.MENUDAOImpl;
 import es.upm.dit.isst.mimenu.dao.PLATODAO;
 import es.upm.dit.isst.mimenu.dao.PLATODAOImpl;
+import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.REST;
 import es.upm.dit.isst.mimenu.model.PLATO;
@@ -22,6 +23,8 @@ import es.upm.dit.isst.mimenu.model.PLATO;
 public class RegistrarMenuSevlet extends HttpServlet {
 	
 	public void init() throws ServletException {
+		ObjectifyService.register(REST.class);
+		ObjectifyService.register(COMENSAL.class);
 		ObjectifyService.register(MENU.class);
 		ObjectifyService.register(PLATO.class);
 	}

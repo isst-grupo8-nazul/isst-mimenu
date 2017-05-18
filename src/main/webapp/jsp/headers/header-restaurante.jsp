@@ -25,7 +25,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li>
-                            <a href="/menus/publicar">Publicar Menú</a>
+                            <a href="/registraMenu">Publicar Menú</a>
                         </li>
 
                         <!-- Dropdown para ver las opciones que tiene el restaurante -->
@@ -37,14 +37,14 @@
                             <ul id="menu-rest" class="dropdown-menu">
                                 <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
                                 <li>
-                                    <a href="/reservas"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
+                                    <a href="/showMenusRest"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
                                 </li>
                                 <li>
                                     <a href="/ajustes"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Mis Ajustes</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="/logoutREST"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
+                                    <a href="/logout"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;Desconectar</a>
                                 </li>
                             </ul>
                         </li>
