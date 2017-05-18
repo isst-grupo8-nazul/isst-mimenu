@@ -20,8 +20,7 @@ import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.REST;
 
-public class ShowMenusRESTServlet extends HttpServlet {
-	
+public class ReservaMenuCOMENSALServlet extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -35,29 +34,30 @@ public class ShowMenusRESTServlet extends HttpServlet {
 		ObjectifyService.register(PLATO.class);
 	}
 	
-	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		
-		REST rest = (REST) req.getSession().getAttribute("userREST");
+		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
 		
-		if (rest != null){
+		PLATODAO platoDao = PLATODAOImpl.getInstancia();
+		
+		if (comensal != null){
 			
-			MENUDAO menuDao = MENUDAOImpl.getInstancia();
-			PLATODAO platosDao = PLATODAOImpl.getInstancia();
+			PLATO primero = platoDao.readById(Long.parseLong(req.getParameter("primero")));
+			PLATO segundo = platoDao.readById(Long.parseLong(req.getParameter("segundo")));
+			PLATO postre = platoDao.readById(Long.parseLong(req.getParameter("postre")));
 			
-			List<MENU> menus = menuDao.readByRest(rest.getEmail());
-			List<PLATO> platos = platosDao.readByREST(rest.getEmail());
+			PLATO[] menu = {primero, segundo, postre};
 			
+			String bebida = req.getParameter("bebida");
 					
-			req.getSession().setAttribute("menusREST", menus);
-			req.getSession().setAttribute("platosREST", platos);
+			req.getSession().setAttribute("menu", menu);
+			req.getSession().setAttribute("bebida", bebida);
 		
-			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/showMenus.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/pagoReserva.jsp");
 			view.forward(req, res);
 		}else{
 			res.sendRedirect("/login");
 		}
 	}
-
 }

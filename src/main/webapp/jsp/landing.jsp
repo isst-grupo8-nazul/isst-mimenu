@@ -5,14 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.REST" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
+<%@ page import="es.upm.dit.isst.mimenu.model.COMENSAL" %>
 
-<% boolean loginrest = (Boolean) request.getAttribute("loginrest"); %>
+<% boolean login = (Boolean) request.getAttribute("login"); %>
 <%
 	HttpSession sessionOk = request.getSession();
 
 	REST rest = (REST) sessionOk.getAttribute("userREST");
-	String comensal = null; 
-// 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");	
+ 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");	
 %>
 
 <!DOCTYPE html>
@@ -263,7 +263,7 @@
 
 		<!-- Parte del Footer -->
 		<jsp:include page="./footer/footer.jsp"/>
-		<c:if test="${not empty loginrest and (loginrest == true)}" >
+		<c:if test="${not empty login and (login == true)}" >
 			<script>
 				$(document).ready(function() {
 					$("#login-modal").modal();

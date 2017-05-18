@@ -47,7 +47,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <!-- Insertar el nombre del usuario -->
-                        Nombre Usuario <span class="caret"></span>
+                        ${param.nombre} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
@@ -59,7 +59,7 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="/desconectar">Desconectar</a>
+                            <a href="/logout">Desconectar</a>
                         </li>
                     </ul>
                 </li>

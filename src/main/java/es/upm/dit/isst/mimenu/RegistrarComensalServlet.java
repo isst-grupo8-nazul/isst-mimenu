@@ -3,7 +3,6 @@ package es.upm.dit.isst.mimenu;
 import java.io.IOException;
 import java.security.MessageDigest;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.ObjectifyService;
 
+import es.upm.dit.isst.mimenu.dao.COMENSALDAO;
+import es.upm.dit.isst.mimenu.dao.COMENSALDAOImpl;
 import es.upm.dit.isst.mimenu.dao.RESTDAO;
 import es.upm.dit.isst.mimenu.dao.RESTDAOImpl;
 import es.upm.dit.isst.mimenu.model.COMENSAL;
@@ -20,8 +21,7 @@ import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.REST;
 
-public class RegistrarRestauranteServlet extends HttpServlet {
-	
+public class RegistrarComensalServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -55,49 +55,43 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 		
 		HttpSession sessionOk = request.getSession();
 		REST rest = (REST) sessionOk.getAttribute("userREST");
+		COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
 		
-		if (rest != null) {
-			response.sendRedirect("/loginrest");
+		if (rest != null || comensal != null) {
+			response.sendRedirect("/login");
 		} else {
 			//Pasamos el formulario de registro de un restaurante
-			RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/registroRestaurante.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("jsp/comensal/registroComensal.jsp");
 			view.forward(request, response);
 		}
 	}
-
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		HttpSession sessionOk = req.getSession();
 		REST rest = (REST) sessionOk.getAttribute("userREST");
+		COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
 		
-		if (rest != null) {
-			res.sendRedirect("/loginrest");
+		if (rest != null || comensal != null) {
+			res.sendRedirect("/login");
 		} else {
 			String email = req.getParameter("email");
 			
 			String nombre = req.getParameter("nombre");
 			
-			String capacidad = req.getParameter("capacidad");
+			
 			String password = req.getParameter("password");
 			
 			String encoded = sha256(password);
 			
 			String direccion = req.getParameter("direccion");
 			String telefono = req.getParameter("telefono");
-			//String logo = req.getParameter("logo-restaurante");
-			String logo = "";
-			String web = req.getParameter("web");
-			String delivery = req.getParameter("delivery");
-			Boolean del = false;
-			if(delivery.equals("si")){
-				del = true;
-			}
 			
-			RESTDAO dao = RESTDAOImpl.getInstancia();
+			COMENSALDAO dao = COMENSALDAOImpl.getInstancia();
 			
-			dao.create(nombre, email, Integer.parseInt(capacidad), encoded, direccion, telefono, logo, web, 0, del);
+			dao.create(null, email, nombre, encoded, direccion, telefono, 0);
 			
-			res.sendRedirect("/loginrest");
+			res.sendRedirect("/login");
 		}
 	}
 }

@@ -4,6 +4,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.List;
 
+import com.googlecode.objectify.Key;
+
 import es.upm.dit.isst.mimenu.model.PLATO;
 
 public class PLATODAOImpl implements PLATODAO {
@@ -37,6 +39,11 @@ public class PLATODAOImpl implements PLATODAO {
 	public List<PLATO> read() {
 		List<PLATO> platos = ofy().load().type(PLATO.class).list();
 		return platos;
+	}
+	
+	public PLATO readById(Long id){
+		PLATO plato = ofy().load().type(PLATO.class).filterKey(Key.create(PLATO.class, id)).first().now();
+		return plato;
 	}
 
 	@Override

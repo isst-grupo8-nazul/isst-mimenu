@@ -10,12 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.ObjectifyService;
 
+import es.upm.dit.isst.mimenu.model.COMENSAL;
+import es.upm.dit.isst.mimenu.model.MENU;
+import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.REST;
 
-public class LogoutRESTServlet  extends HttpServlet{
+public class LogoutServlet  extends HttpServlet{
 	@Override
 	public void init() throws ServletException {
 		ObjectifyService.register(REST.class);
+		ObjectifyService.register(COMENSAL.class);
+		ObjectifyService.register(MENU.class);
+		ObjectifyService.register(PLATO.class);
 	}
 	private static final long serialVersionUID = 1L;
 	

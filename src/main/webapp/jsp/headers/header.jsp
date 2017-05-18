@@ -22,17 +22,14 @@
 	            <li>
 	              <a href="/registrarRestaurante">Registra Tu Restaurante</a>
 	            </li>
-	            <li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Login
-						<span class="caret"></span>
-					</a>
-					<ul id="login-menu" class="dropdown-menu">
-						<li><a href="#">Cliente</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#login-modal">Restaurante</a></li>
-					</ul>
-				</li>
+	            
 	            <li>
-	              <a href="/registrate">Regístrate</a>
+	              <a href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
+	            </li>
+	            
+	            
+	            <li>
+	              <a href="/registrarComensal">Regístrate</a>
 	            </li>
 	            <li>
 	              <a href="/ayuda">Ayuda</a>
@@ -58,7 +55,7 @@
                 <div id="div-forms">
 
                     <!-- Begin # Login Form -->
-                    <form id="login-form"  action="/loginrest" method="POST">
+                    <form id="login-form"  action="/login" method="POST">
 		                <div class="modal-body">
 				    		<div id="div-login-msg">
                                 <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>

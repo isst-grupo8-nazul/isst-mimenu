@@ -95,7 +95,7 @@
 								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 								Publicar Menú
 							</a>
-							<a href="/logoutREST" type="button" class="btn btn-danger btn-sm">
+							<a href="/logout" type="button" class="btn btn-danger btn-sm">
 								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
 								Logout
 							</a>
@@ -129,7 +129,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="/logoutREST">
+									<a href="/logout">
 										<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
 										Logout
 									</a>
