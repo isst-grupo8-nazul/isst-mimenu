@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
+<!-- Creo el blobstoreService para poder aÃ±adir imÃ¡genes -->
+<%
+BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -9,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>MiMenú</title>
+    <title>MiMenÃº</title>
 
     <!-- Estilos y js Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,7 +37,7 @@
 
     <!-- Parte del formulario de Registro -->
     <div class="container registro-restaurante">
-        <form method="post" action="/registrarRestaurante" class="form-horizontal" >
+        <form method="post" action="<%= blobstoreService.createUploadUrl("/registrarRestaurante") %>" class="form-horizontal" enctype="multipart/form-data">
             <fieldset>
                 <!-- Formulario de Registro -->
                 <legend class="text-center">Registra tu Restaurante</legend>
@@ -42,14 +49,11 @@
                         <input id="usuario" name="nombre" type="text" placeholder="Nombre de tu Restaurante" class="form-control input-md" required>
                     </div>
                 </div>
-
-               
-
-                <!-- Contraseña -->
+                <!-- ContraseÃ±a -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="password">Password</label>
                     <div class="col-md-4">
-                        <input id="password" name="password" type="password" placeholder="Contraseña" class="form-control input-md" required>
+                        <input id="password" name="password" type="password" placeholder="ContraseÃ±a" class="form-control input-md" required>
                     </div>
                 </div>
 
@@ -61,13 +65,13 @@
                     </div>
                 </div>
 
-                <!-- Logo del Restaurante
+                <!-- Logo del Restaurante -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="logo-restaurante">Logo Restaurante</label>
                     <div class="col-md-4">
                         <input id="logo-restaurante" name="logo-restaurante" class="input-file" type="file">
                     </div>
-                </div>-->
+                </div>
 
                 <!-- Capacidad del Restaurante -->
                 <div class="form-group">
@@ -77,19 +81,19 @@
                     </div>
                 </div>
 
-                <!-- Dirección´-->
+                <!-- DirecciÃ³nÂ´-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="direccion">Dirección:</label>
+                    <label class="col-md-4 control-label" for="direccion">DirecciÃ³n:</label>
                     <div class="col-md-4">
-                        <input id="direccion" name="direccion" type="text" placeholder="Dirección de tu restaurante" class="form-control input-md" required>
+                        <input id="direccion" name="direccion" type="text" placeholder="DirecciÃ³n de tu restaurante" class="form-control input-md" required>
                     </div>
                 </div>
 
-                <!-- Teléfono -->
+                <!-- TelÃ©fono -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="telefono">Teléfono</label>
+                    <label class="col-md-4 control-label" for="telefono">TelÃ©fono</label>
                     <div class="col-md-4">
-                        <input id="telefono" name="telefono" type="number" placeholder="Teléfono de Contacto" class="form-control input-md" required>
+                        <input id="telefono" name="telefono" type="number" placeholder="TelÃ©fono de Contacto" class="form-control input-md" required>
                     </div>
                 </div>
 
@@ -103,12 +107,12 @@
 
                 <!-- Delivery -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="delivery">¿Hacéis envíos a Domicilio?</label>
+                    <label class="col-md-4 control-label" for="delivery">Â¿HacÃ©is envÃ­os a Domicilio?</label>
                     <div class="col-md-4">
                         <div class="radio">
                             <label for="delivery-0">
                                 <input type="radio" name="delivery" id="delivery-0" value="si" checked="checked">
-                                Sí
+                                SÃ­
                             </label>
                         </div>
                         <div class="radio">

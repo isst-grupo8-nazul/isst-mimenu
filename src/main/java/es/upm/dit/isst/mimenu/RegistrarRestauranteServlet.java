@@ -2,7 +2,8 @@ package es.upm.dit.isst.mimenu;
 
 import java.io.IOException;
 import java.security.MessageDigest;
-
+import java.util.Map;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +20,10 @@ import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.REST;
+
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 public class RegistrarRestauranteServlet extends HttpServlet {
 	
@@ -50,6 +55,8 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 	    }
 	}
 	
+	private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		      throws IOException, ServletException {
 		
@@ -73,6 +80,10 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 		if (rest != null) {
 			res.sendRedirect("/loginrest");
 		} else {
+			Map<String, java.util.List<BlobKey>> blobs = blobstoreService.getUploads(req);
+
+			List<BlobKey> blobKeys = blobs.get("logo-restaurante");
+			
 			String email = req.getParameter("email");
 			
 			String nombre = req.getParameter("nombre");
@@ -84,8 +95,7 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 			
 			String direccion = req.getParameter("direccion");
 			String telefono = req.getParameter("telefono");
-			//String logo = req.getParameter("logo-restaurante");
-			String logo = "";
+			String logo = blobKeys.get(0).getKeyString();
 			String web = req.getParameter("web");
 			String delivery = req.getParameter("delivery");
 			Boolean del = false;

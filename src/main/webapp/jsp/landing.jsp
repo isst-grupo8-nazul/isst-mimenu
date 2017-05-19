@@ -26,7 +26,7 @@
 
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 		<!-- enlazo mis propios estilos -->
 		<link rel="stylesheet" type="text/css" href="../css/landing.css">
@@ -34,7 +34,7 @@
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  		<script src="./js/rating.js"></script>
+  		<script src="../js/rating.js"></script>
 
 	</head>
 	<body>
@@ -92,15 +92,15 @@
 			<!-- Parte de las imágenes -->
 			<div class="row">
 				<div class="col-sm-4">
-					<img class="img-circle comofunciona" src="./img/comofunciona-buscar.png" alt="Como funciona">
+					<img class="img-circle comofunciona" src="../img/comofunciona-buscar.png" alt="Como funciona">
 					<p><strong>Busca tu menú</strong></p><br>
 				</div>
 				<div class="col-sm-4">
-					<img class="img-circle comofunciona" src="./img/comofunciona-calendario.png" alt="Como funciona">
+					<img class="img-circle comofunciona" src="../img/comofunciona-calendario.png" alt="Como funciona">
 					<p><strong>Resérvalo</strong></p><br>
 				</div>
 				<div class="col-sm-4">
-					<img class="img-circle comofunciona" src="./img/comofunciona-disfruta.png" alt="Como funciona"><br>
+					<img class="img-circle comofunciona" src="../img/comofunciona-disfruta.png" alt="Como funciona"><br>
 					<p><strong>Disfruta</strong></p><br>
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 				<div class="col-sm-6 ficha-restaurante">
 					<div class="row">
 						<div class="imagen-restaurante-div img-responsive col-xs-3">
-							<img class="imagen-restaurante" src="./img/buscar.jpg">
+							<img class="imagen-restaurante" src="../img/buscar.jpg">
 						</div>
 						<div class="col-xs-5">
 							<h2>NOMBRE</h2><br>
@@ -163,7 +163,7 @@
 				<div class="col-sm-6 ficha-restaurante">
 					<div class="row">
 						<div class="img-responsive col-xs-3">
-							<img class="imagen-restaurante" src="./img/teimoso.gif">
+							<img class="imagen-restaurante" src="../img/teimoso.gif">
 						</div>
 						<div class="col-xs-5">
 							<h2>NOMBRE</h2><br>

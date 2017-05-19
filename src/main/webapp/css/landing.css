@@ -261,7 +261,7 @@ ul.menu-opciones {
 	list-style: none;
 	display: inline;
 	margin-left:0 !important;
-	padding: 0;
+	padding: 0px;
 }
 ul.menu-opciones li {
 	display: inline;
@@ -357,11 +357,11 @@ ul.social-network {
 	list-style: none;
 	display: inline;
 	margin-left:0 !important;
-	padding: 0;
+	padding: 0px;
 }
 ul.social-network li {
 	display: inline;
-	margin: 0 5px;
+	margin: 0px 5px;
 }
 .social-network a.icoRss:hover {
 	background-color: #F56505;

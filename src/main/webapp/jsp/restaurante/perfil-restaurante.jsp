@@ -8,6 +8,9 @@
 <%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.PLATO" %>
 
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
 <%
 	HttpSession sessionOk = request.getSession();
 
@@ -25,6 +28,13 @@
 	String web = rest.getWeb();
 	int capacidad = rest.getCapacidad();
 	String delivery = (rest.isDelivery()) ? "si":"no";
+	
+	String logo = rest.getLogo();
+%>
+
+<%
+	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	String blobKey = logo;
 %>
 
 <!DOCTYPE html>
@@ -62,7 +72,7 @@
 					<div class="profile-sidebar">
 						<!-- SIDEBAR USERPIC -->
 						<div class="profile-userpic">
-							<img src="./img/teimoso.gif" class="img-responsive" alt="">
+							<img src="<a href='/serve-image?blob-key=<%= blobKey %>'>/serve-image?blob-key=<%= blobKey %></a>" class="img-responsive" alt="">
 						</div>
 						<!-- END SIDEBAR USERPIC -->
 						<!-- SIDEBAR USER TITLE -->

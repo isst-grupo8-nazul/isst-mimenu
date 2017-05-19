@@ -14,7 +14,7 @@
 	          </button>
 
 	          <!-- Poner Logo Mimenú -->
-	          <a class="navbar-brand" href="/"><img src="./img/logo-blanco.png"></a>
+	          <a class="navbar-brand" href="/"><img src="../img/logo-blanco.png"></a>
 	        </div>
 
 	        <div id="navbar" class="navbar-collapse collapse">
