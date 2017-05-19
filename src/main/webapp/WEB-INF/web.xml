@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:web="http://java.sun.com/xml/ns/javaee" 
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+        version="2.5">
+
   <filter>
     <filter-name>ObjectifyFilter</filter-name>
     <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
@@ -8,6 +13,7 @@
     <filter-name>ObjectifyFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <servlet>
     <servlet-name>HelloAppEngine</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.HelloAppEngine</servlet-class>
@@ -16,9 +22,13 @@
     <servlet-name>HelloAppEngine</servlet-name>
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
+
+  <!-- Página inicial -->
   <welcome-file-list>
     <welcome-file>jsp/landing.jsp</welcome-file>
   </welcome-file-list>
+
+  <!-- Servlet para el login -->
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.LoginServlet</servlet-class>
@@ -27,6 +37,8 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para el Logout de restaurantes -->
   <servlet>
     <servlet-name>LogOut</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.LogoutServlet</servlet-class>
@@ -35,6 +47,8 @@
     <servlet-name>LogOut</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para registrar un Restaurante -->
   <servlet>
     <servlet-name>RegistraRestaurante</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.RegistrarRestauranteServlet</servlet-class>
@@ -43,6 +57,8 @@
     <servlet-name>RegistraRestaurante</servlet-name>
     <url-pattern>/registrarRestaurante</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para registrar un comensal -->
   <servlet>
     <servlet-name>RegistraComensal</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.RegistrarComensalServlet</servlet-class>
@@ -51,6 +67,8 @@
     <servlet-name>RegistraComensal</servlet-name>
     <url-pattern>/registrarComensal</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para registrar un MENU -->
   <servlet>
     <servlet-name>RegistraMenu</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.RegistrarMenuSevlet</servlet-class>
@@ -59,6 +77,8 @@
     <servlet-name>RegistraMenu</servlet-name>
     <url-pattern>/registraMenu</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para ver un MENU -->
   <servlet>
     <servlet-name>ShowMenusREST</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.ShowMenusRESTServlet</servlet-class>
@@ -67,6 +87,8 @@
     <servlet-name>ShowMenusREST</servlet-name>
     <url-pattern>/showMenusRest</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para reservar un MENU -->
   <servlet>
     <servlet-name>ReservaMenuCOMENSAL</servlet-name>
     <servlet-class>es.upm.dit.isst.mimenu.ReservaMenuCOMENSALServlet</servlet-class>
@@ -75,6 +97,8 @@
     <servlet-name>ReservaMenuCOMENSAL</servlet-name>
     <url-pattern>/reservaMenu</url-pattern>
   </servlet-mapping>
+
+  <!-- Servlet para mostrar las imágenes -->
   <servlet>
     <description></description>
     <display-name>ServeImage</display-name>
@@ -85,4 +109,6 @@
     <servlet-name>ServeImage</servlet-name>
     <url-pattern>/serve-image</url-pattern>
   </servlet-mapping>
+
+
 </web-app>
