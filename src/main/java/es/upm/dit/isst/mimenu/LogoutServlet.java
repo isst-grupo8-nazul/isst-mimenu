@@ -13,6 +13,7 @@ import com.googlecode.objectify.ObjectifyService;
 import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
+import es.upm.dit.isst.mimenu.model.RESERVA;
 import es.upm.dit.isst.mimenu.model.REST;
 
 public class LogoutServlet  extends HttpServlet{
@@ -22,6 +23,7 @@ public class LogoutServlet  extends HttpServlet{
 		ObjectifyService.register(COMENSAL.class);
 		ObjectifyService.register(MENU.class);
 		ObjectifyService.register(PLATO.class);
+		ObjectifyService.register(RESERVA.class);
 	}
 	private static final long serialVersionUID = 1L;
 	

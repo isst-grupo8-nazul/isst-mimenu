@@ -97,6 +97,26 @@
     <servlet-name>ReservaMenuCOMENSAL</servlet-name>
     <url-pattern>/reservaMenu</url-pattern>
   </servlet-mapping>
+  
+  <!-- Servlet para mostrar RESERVAS en COMENSALES -->
+  <servlet>
+    <servlet-name>ShowReservaMenuCOMENSAL</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.ShowReservasComensalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowReservaMenuCOMENSAL</servlet-name>
+    <url-pattern>/showReservasComensal</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Servlet para mostrar RESERVAS en REST -->
+  <servlet>
+    <servlet-name>ShowReservaMenuREST</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.ShowReservasMenuRESTServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowReservaMenuREST</servlet-name>
+    <url-pattern>/showReservasREST</url-pattern>
+  </servlet-mapping>
 
   <!-- Servlet para mostrar las imágenes -->
   <servlet>

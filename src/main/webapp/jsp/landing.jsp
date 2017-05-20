@@ -53,7 +53,9 @@
 	    		<jsp:param name="nombre" value="<%= nombreRest %>" />
 	    	</jsp:include>
 	    <% } else if ( comensal != null) { %>
-			<jsp:include page="./headers/header-usuario.jsp"/>
+			<jsp:include page="./headers/header-usuario.jsp">
+				<jsp:param name="nombre" value="<%= comensal.getNombre() %>" />
+	    	</jsp:include>
 		<% } else { %>
 			<jsp:include page="./headers/header.jsp"/>
 		<% } %>

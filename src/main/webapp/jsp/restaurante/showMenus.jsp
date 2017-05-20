@@ -146,7 +146,11 @@
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h3>
-								<strong><%= menu.getNombre() %></strong>
+								<form action="/showReservasREST" method="get">
+										<input type="hidden" name="menuId" value="<%= menu.getId() %>"/>
+									    <input type="submit" class="btn btn-link" value="<%= menu.getNombre() %>" />
+								</form>
+								
 								<span class="label label-info">
 									<span class="glyphicon glyphicon-tag"></span> <%= menu.getCategorias() %>
 								</span>

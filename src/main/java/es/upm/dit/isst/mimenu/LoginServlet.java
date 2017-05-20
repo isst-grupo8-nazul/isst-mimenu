@@ -24,6 +24,7 @@ import es.upm.dit.isst.mimenu.dao.RESTDAOImpl;
 import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
+import es.upm.dit.isst.mimenu.model.RESERVA;
 import es.upm.dit.isst.mimenu.model.REST;
 
 public class LoginServlet extends HttpServlet{
@@ -33,6 +34,7 @@ public class LoginServlet extends HttpServlet{
 		ObjectifyService.register(COMENSAL.class);
 		ObjectifyService.register(MENU.class);
 		ObjectifyService.register(PLATO.class);
+		ObjectifyService.register(RESERVA.class);
 	}
 	
 	private static final long serialVersionUID = 1L;
@@ -68,7 +70,7 @@ public class LoginServlet extends HttpServlet{
 			view.forward(req, res);
 			
 		} else if(comensalSession != null){
-			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-comensal.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
 		}else{
 			

@@ -38,7 +38,7 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="/reservas">VER TODAS TUS RESERVAS</a>
+                            <a href="/showReservasComensal">VER TODAS TUS RESERVAS</a>
                         </li>
                     </ul>
                 </li>
@@ -52,7 +52,7 @@
                     <ul class="dropdown-menu">
                         <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
                         <li>
-                            <a href="/reservas">Mis Reservas</a>
+                            <a href="/showReservasComensal">Mis Reservas</a>
                         </li>
                         <li>
                             <a href="/ajustes">Mis Ajustes</a>

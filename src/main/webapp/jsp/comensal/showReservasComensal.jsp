@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ page import= "java.util.List" %>
+<%@ page import= "java.util.ArrayList" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
@@ -9,15 +10,30 @@
 <%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.PLATO" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.COMENSAL" %>
+<%@ page import="es.upm.dit.isst.mimenu.model.RESERVA" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.MENUDAO" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.MENUDAOImpl" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.PLATODAO" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.PLATODAOImpl" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.RESERVADAO" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.RESERVADAOImpl" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.RESTDAO" %>
+<%@ page import="es.upm.dit.isst.mimenu.dao.RESTDAOImpl" %>
 
 <%
+	
+	
 	HttpSession sessionOk = request.getSession();
 
 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
+	List<RESERVA> reservas = (List<RESERVA>) sessionOk.getAttribute("reservas");
+	List<MENU> menus = (List<MENU>) sessionOk.getAttribute("menus");
+	List<REST> rests = (List<REST>) sessionOk.getAttribute("rests");
+	List<PLATO> platos = (List<PLATO>) sessionOk.getAttribute("platos");
 	
-	List<MENU> menus = (List<MENU>) sessionOk.getAttribute("menusCOMENSAL");
-	List<PLATO> platos = (List<PLATO>) sessionOk.getAttribute("platosCOMENSAL");
-	List<REST> rests = (List<REST>) sessionOk.getAttribute("restsCOMENSAL");
+	
+	
+	
 
 	if (comensal == null) {
 		RequestDispatcher viewer = request.getRequestDispatcher("jsp/restuarante/registroComensal.jsp");
@@ -49,14 +65,15 @@
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   		
   		<style>
-			#showMenus ul {
+			#showReservas ul {
 			    list-style-type: none;
 			    margin: 0px;
 			    padding: 10px 10px 0px 0px;
 			}
-			#showMenus .tags a{text-decoration: none; border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
-			#showMenus .tags a.success{cursor:default; text-decoration: none; color:#FFF;background-color:#5CB85C;border-color:#4CAE4C}
-			#showMenus .tags a.primary{color:#FFF;background-color:#428BCA;border-color:#357EBD}
+			#showReservas .tags a{text-decoration: none; border:1px solid #DDD;display:inline-block;color:#717171;background:#FFF;-webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out;border-radius:2px;margin:0 3px 6px 0;padding:5px 10px}
+			#showReservas .tags a.success{cursor:default; text-decoration: none; color:#FFF;background-color:#5CB85C;border-color:#4CAE4C}
+			#showReservas .tags a.primary{color:#FFF;background-color:#428BCA;border-color:#357EBD}
+			#showReservas .tags a.info{color:#FFF;background-color:#5BC0DE;border-color:#46B8DA}
 		</style>
 
 	</head>
@@ -104,22 +121,16 @@
 						<!-- SIDEBAR MENU -->
 						<div class="profile-usermenu">
 							<ul class="nav">
-								<li id="perfil" class="active">
+								<li id="perfil" >
 									<a href="/login">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Menus Disponibles
 									</a>
 								</li>
-								<li id="publicar-menu">
+								<li id="publicar-menu" class="active">
 									<a href="/showReservasComensal">
-										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
-										Reservas
-									</a>
-								</li>
-								<li id="mis-menus">
-									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
-										Mis Menús
+										Reservas
 									</a>
 								</li>
 								<li id="mis-ajustes">
@@ -141,9 +152,21 @@
 				</div>
 
 					
-				<div id="showMenus" class="col-sm-9">
+				<div id="showReservas" class="col-sm-9">
 					<% if(!menus.isEmpty()){
-						for(MENU menu : menus){ %>
+						
+						for(MENU menu : menus){ 
+							String bebida="Ron-Cola";
+							for(RESERVA reserva : reservas){
+								if(reserva.getMenuId().equals(menu.getId())){
+									
+									bebida = reserva.getBebida();
+									break;
+								}
+							}
+							
+						
+						%>
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<h3>
@@ -161,14 +184,13 @@
 						  				 <h4><%= rest.getNombre() %></h4>
 						  			<% } } %>
 						  		</div>
-						  		<form action="/reservaMenu" method="get" id="menu<%= menu.getId() %>">
 							  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							  		<h4><strong>Primeros</strong></h4>
+							  		<h4><strong>Primero</strong></h4>
 							  		<ul>
 							  			<% for(PLATO plato : platos) {
 							  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("primero")){%>
 							  				<li>
-							  					<input type="radio" name="primero" value="<%=plato.getId() %>"><%=plato.getNombre() %>
+							  					<%=plato.getNombre() %>
 							  					<span class="label label-info pull-right">
 							  						<span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %>
 							  					</span>
@@ -177,12 +199,12 @@
 							  		</ul>
 							  	</div>
 							  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							  		<h4><strong>Segundos</strong></h4>
+							  		<h4><strong>Segundo</strong></h4>
 							  		<ul>
 							  			<% for(PLATO plato : platos) {
 							  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("segundo")){%>
 							  				<li>
-							  					<input type="radio" name="segundo" value="<%=plato.getId() %>"><%=plato.getNombre() %>
+							  					<%=plato.getNombre() %>
 							  					<span class="label label-info pull-right">
 							  						<span class="glyphicon glyphicon-tag"></span><%=plato.getCategoria() %>
 							  					</span>
@@ -191,12 +213,12 @@
 							  		</ul>
 							  	</div>
 							  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							  		<h4><strong>Postres</strong></h4>
+							  		<h4><strong>Postre</strong></h4>
 							  		<ul>
 							  			<% for(PLATO plato : platos) {
 							  				if(plato.getMenuId().equals(menu.getId()) && plato.getTipo().equals("postre")){%>
 							  				<li>
-							  					<input type="radio" name="postre" value="<%=plato.getId() %>"><%=plato.getNombre() %>
+							  					<%=plato.getNombre() %>
 							  					<span class="label label-info pull-right">
 							  						<span class="glyphicon glyphicon-tag"></span> <%=plato.getCategoria() %>
 							  					</span>
@@ -205,20 +227,20 @@
 							  		</ul>
 							  	</div>
 							  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-							  		<h4><strong>Bebidas</strong></h4>
+							  		<h4><strong>Bebida</strong></h4>
 							  		<ul>
-							  			<% for(String bebida : menu.getBebidas()){%>
+							  			
 							  				<li>
-							  					<input type="radio" name="bebida" value="<%= bebida %>"><%= bebida %>
+							  					<%= bebida %>
 							  				</li>
-							  			<% } %>
+							  			
 							  		</ul>
 							  	</div>
 						  		<div class="tags col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						  			<a href="#" onclick="event.preventDefault();" class="success">
-						  				<%= menu.getPrecio() %> <i class="fa fa-eur" aria-hidden="true"></i>
+						  			<a href="#" onclick="event.preventDefault();" class="info">
+						  				Pagado</i>
 						  			</a>
-						  			<a href="#" onclick="document.getElementById('menu<%= menu.getId() %>').submit();" class="primary">Reservar</a>
+						  			
 						  		</div>
 						  		</form>
 						  			
@@ -226,7 +248,7 @@
 						  	</div>
 						</div>
 					<% } }else{%>
-						<p>No hay publicados menús por ahora</p>
+						<p>No tienes reservas por ahora</p>
 					<% } %>
 					</div>
 						

@@ -19,6 +19,7 @@ import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.REST;
 import es.upm.dit.isst.mimenu.model.PLATO;
+import es.upm.dit.isst.mimenu.model.RESERVA;
 
 public class RegistrarMenuSevlet extends HttpServlet {
 	
@@ -27,6 +28,7 @@ public class RegistrarMenuSevlet extends HttpServlet {
 		ObjectifyService.register(COMENSAL.class);
 		ObjectifyService.register(MENU.class);
 		ObjectifyService.register(PLATO.class);
+		ObjectifyService.register(RESERVA.class);
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 

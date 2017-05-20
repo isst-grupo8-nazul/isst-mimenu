@@ -19,6 +19,7 @@ import es.upm.dit.isst.mimenu.dao.RESTDAOImpl;
 import es.upm.dit.isst.mimenu.model.COMENSAL;
 import es.upm.dit.isst.mimenu.model.MENU;
 import es.upm.dit.isst.mimenu.model.PLATO;
+import es.upm.dit.isst.mimenu.model.RESERVA;
 import es.upm.dit.isst.mimenu.model.REST;
 
 public class RegistrarComensalServlet extends HttpServlet{
@@ -30,6 +31,7 @@ public class RegistrarComensalServlet extends HttpServlet{
 		ObjectifyService.register(COMENSAL.class);
 		ObjectifyService.register(MENU.class);
 		ObjectifyService.register(PLATO.class);
+		ObjectifyService.register(RESERVA.class);
 	}
 	
 	public static String sha256(String base) {
