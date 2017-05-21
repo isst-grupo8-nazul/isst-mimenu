@@ -70,6 +70,10 @@ nav .container-fuid {
 	border: 0px;
 }
 
+.parametro-buscador select {
+	border:none;
+}
+
 .jumbotron {
 	background-color: #F5BA4D; /* Naranja */
 	color: #ffffff;

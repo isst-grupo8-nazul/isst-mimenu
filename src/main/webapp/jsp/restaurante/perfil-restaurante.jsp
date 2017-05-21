@@ -138,10 +138,10 @@
 
 				<div class="col-sm-9">
 
-					<form method="post" action="/registrarRestaurante" class="form-horizontal" >
+					<form method="post" action="/actualizarRestaurante" class="form-horizontal" >
 			            <fieldset>
 			                <!-- Inofrmación del restaurante -->
-			                <legend class="text-center">Tu Restaurante</legend>
+			                <legend class="text-center"><%= nombre %></legend>
 
 			                <!-- Nombre del Restaurante -->
 			                <div class="form-group">
@@ -163,7 +163,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="email">Email</label>
 			                    <div class="col-md-4">
-			                        <input id="email" name="email" type="email" value="<%= email %>" class="form-control input-md">
+			                        <input id="email" name="email" type="email" value="<%= email %>" class="form-control input-md" readonly>
 			                    </div>
 			                </div>
 

@@ -139,6 +139,18 @@
     <servlet-name>ServeImage</servlet-name>
     <url-pattern>/serve-image</url-pattern>
   </servlet-mapping>
+  
+  <!-- Servlet para actualizar un restaurante -->
+  <servlet>
+    <description></description>
+    <display-name>ActualizarRESTServlet</display-name>
+    <servlet-name>ActualizarRESTServlet</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.ActualizarRESTServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActualizarRESTServlet</servlet-name>
+    <url-pattern>/actualizarRestaurante</url-pattern>
+  </servlet-mapping>
 
 
 </web-app>
