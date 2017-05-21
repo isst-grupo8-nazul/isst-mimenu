@@ -140,11 +140,10 @@
 
 					
 				<div id="showMenus" class="col-sm-9">
-					<% if(!menus.isEmpty()){
+					<% if (comensal == null) { %>
+						<% if(!menus.isEmpty()){
 						for(MENU menu : menus){
-							System.out.println(menu.getTurno());
 							if(menu.getTurno().equals(turno)){
-						
 						%>
 						
 						<div class="panel panel-info">
@@ -221,6 +220,9 @@
 						  			<a href="#" onclick="event.preventDefault();" class="success">
 						  				<%= menu.getPrecio() %> <i class="fa fa-eur" aria-hidden="true"></i>
 						  			</a>
+						  			<a href="/login?busqueda=true" class="info">
+						  				Reservar
+						  			</a>
 						  			
 						  		</div>
 						  		
@@ -235,6 +237,8 @@
 						<p>No hay publicados menús con estas características</p>
 					<% } %>
 					</div>
+					<% } %>
+					
 						
 						
 						

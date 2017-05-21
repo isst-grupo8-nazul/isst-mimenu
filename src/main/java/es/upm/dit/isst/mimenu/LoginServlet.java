@@ -73,11 +73,18 @@ public class LoginServlet extends HttpServlet{
 			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
 		}else{
-			
-			boolean login = true;
-			req.setAttribute("login", login);
-			RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
-			view.forward(req, res);
+			String busqueda = req.getParameter("busqueda");
+			if (busqueda.equals("true")){
+				boolean login = true;
+				req.setAttribute("login", login);
+				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
+				view.forward(req, res);
+			} else {
+				boolean login = true;
+				req.setAttribute("login", login);
+				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
+				view.forward(req, res);
+			}
 		
 		}
 	}

@@ -59,10 +59,7 @@ public class SearchMenusServlet extends HttpServlet {
 					platos.add(plato);
 				}
 			rests.add(restDao.read(menu.getRestEmail()));
-		}
-		
-		System.out.println(turno);
-		
+		}		
 		
 		req.getSession().setAttribute("menus", menus);
 		req.getSession().setAttribute("platos", platos);
