@@ -69,25 +69,25 @@
 			<form action="/buscar" method="POST" class="form-inline">
 
 				<div class="input-group">
-					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" required>
+					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" >
 
-					<div class="input-group-addon parametro-buscador">
+					<div class="input-group-addon parametro-buscador" required>
 						<input type="date"  name="fecha" required>
 					</div>
 
 					<div class="input-group-addon parametro-buscador">
-						<select>
+						<select name="turno">
 						  <option value="comida">Comida</option>
 						  <option value="cena">Cena</option>
 						</select>
 					</div>
 
 					<div class="input-group-addon parametro-buscador">
-						<input type="number" name="personas" placeholder="Personas" required>
+						<input type="number" name="personas" placeholder="Personas" >
 					</div>
 
 					<div class="input-group-btn">
-						<button type="button" class="btn btn-danger">Buscar</button>
+						<button type="submit" class="btn btn-danger">Buscar</button>
 					</div>
 				</div>
 			</form>

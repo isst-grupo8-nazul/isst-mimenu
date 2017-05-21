@@ -246,7 +246,7 @@
 					  	</div>
 					</div>
 					
-					
+					<% if(reservas.size() > 0){ %>
 					<div class="table-responsive">
 						<table class="table table-striped">
 							<thead>
@@ -301,7 +301,9 @@
 					
 					
 					</div>
-					
+					<% } else { %>
+						No hay reservas de este menú aún
+					<% } %>
 
 					
 				</div>

@@ -244,7 +244,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="fecha">Fecha:</label>
 			                    <div class="col-md-4">
-			                        <input id="fecha" name="fecha" type="text" class="form-control input-md" required>
+			                        <input id="fecha" name="fecha" type="date" class="form-control input-md" required>
 			                    </div>
 			                </div>
 

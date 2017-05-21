@@ -117,6 +117,16 @@
     <servlet-name>ShowReservaMenuREST</servlet-name>
     <url-pattern>/showReservasREST</url-pattern>
   </servlet-mapping>
+  
+    <!-- Servlet para buscar MENUS -->
+  <servlet>
+    <servlet-name>SearchMenus</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.SearchMenusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchMenus</servlet-name>
+    <url-pattern>/buscar</url-pattern>
+  </servlet-mapping>
 
   <!-- Servlet para mostrar las imágenes -->
   <servlet>
