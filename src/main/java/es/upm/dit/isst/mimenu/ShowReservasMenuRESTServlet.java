@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,8 @@ public class ShowReservasMenuRESTServlet extends HttpServlet{
 			COMENSALDAO comensalDao = COMENSALDAOImpl.getInstancia();
 			
 			List<RESERVA> reservas = reservaDao.readByMenuId(Long.parseLong(req.getParameter("menuId")));
+			MENU menu = menuDao.read(Long.parseLong(req.getParameter("menuId")));
+			List<PLATO> platosMenu = platoDao.readByMenu(Long.parseLong(req.getParameter("menuId")));
 			
 			List<COMENSAL> comensales = new ArrayList<COMENSAL>();
 			List<PLATO> platos = new ArrayList<PLATO>();
@@ -74,6 +77,14 @@ public class ShowReservasMenuRESTServlet extends HttpServlet{
 				
 			}
 			
+			req.getSession().setAttribute("reservas", reservas);
+			req.getSession().setAttribute("platos", platos);
+			req.getSession().setAttribute("platosMenu", platosMenu);
+			req.getSession().setAttribute("menu", menu);
+			req.getSession().setAttribute("comensales", comensales);
+			
+			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/showReservasMenu.jsp");
+			view.forward(req, res);
 			
 		}else{
 			res.sendRedirect("/login");

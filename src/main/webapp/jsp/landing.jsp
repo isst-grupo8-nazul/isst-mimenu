@@ -27,14 +27,17 @@
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
-
+		
 		<!-- enlazo mis propios estilos -->
 		<link rel="stylesheet" type="text/css" href="../css/landing.css">
+		<link rel="stylesheet" href="../css/pickaday.css">
 
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   		<script src="../js/rating.js"></script>
+  		<script src="../js/pickaday.js"></script>
+  		<script src="../js/moment.js"></script>
 
 	</head>
 	<body>
@@ -69,7 +72,7 @@
 					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" required>
 
 					<div class="input-group-addon parametro-buscador">
-						<input type="date" name="fecha" placeholder="Fecha" required>
+						<input type="text" id="datepicker" name="fecha" required>
 					</div>
 
 					<div class="input-group-addon parametro-buscador">
@@ -272,5 +275,36 @@
 				});
 			</script>
 		</c:if>
+		<script type="text/javascript">
+		
+		
+		
+		 var picker = new Pikaday(
+		{
+				field: document.getElementById('datepicker'),
+				closeText: 'Cerrar',
+				prevText: 'mes anterior',
+				nextText: 'mes siguiente',
+				format: "DD/MM/YY",
+				firstDay: 1,
+				dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+				dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+				monthNames:
+				["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+				"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+				monthNamesShort:
+				["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+				"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+				showOtherMonths: true,
+				selectOtherMonths: true,
+				numberOfMonths: 1,
+				changeMonth: true,
+			    changeYear: true,
+				minDate: new Date(), 
+				
+				
+				
+			});
+		</script>
 	</body>
 </html>

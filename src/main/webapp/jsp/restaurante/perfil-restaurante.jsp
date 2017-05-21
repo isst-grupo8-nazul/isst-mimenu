@@ -10,6 +10,7 @@
 
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobKey" %>
 
 <%
 	HttpSession sessionOk = request.getSession();
@@ -34,7 +35,6 @@
 
 <%
 	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-	String blobKey = logo;
 %>
 
 <!DOCTYPE html>
@@ -72,7 +72,7 @@
 					<div class="profile-sidebar">
 						<!-- SIDEBAR USERPIC -->
 						<div class="profile-userpic">
-							<img src="<a href='/serve-image?blob-key=<%= blobKey %>'>/serve-image?blob-key=<%= blobKey %></a>" class="img-responsive" alt="">
+							<img src="/serve-image?blob-key=<%= logo %>" class="img-responsive" alt="">
 						</div>
 						<!-- END SIDEBAR USERPIC -->
 						<!-- SIDEBAR USER TITLE -->
@@ -147,15 +147,15 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="usuario">Nombre</label>
 			                    <div class="col-md-4">
-			                        <input id="usuario" name="nombre" type="text" value="<%= nombre %>" class="form-control input-md" required>
+			                        <input id="usuario" name="nombre" type="text" value="<%= nombre %>" class="form-control input-md">
 			                    </div>
 			                </div>
 
 			                <!-- Contraseña -->
 			                <div class="form-group">
-			                    <label class="col-md-4 control-label" for="password">Password</label>
+			                    <label class="col-md-4 control-label" for="password">Contraseña</label>
 			                    <div class="col-md-4">
-			                        <input id="password" name="password" type="password" value="Contraseña" class="form-control input-md" required>
+			                        <input id="password" name="password" type="text" placeholder="Nueva Contraseña..." class="form-control input-md">
 			                    </div>
 			                </div>
 
@@ -163,7 +163,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="email">Email</label>
 			                    <div class="col-md-4">
-			                        <input id="email" name="email" type="email" value="<%= email %>" class="form-control input-md" required>
+			                        <input id="email" name="email" type="email" value="<%= email %>" class="form-control input-md">
 			                    </div>
 			                </div>
 
@@ -179,7 +179,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="capacidad">Capacidad</label>
 			                    <div class="col-md-2">
-			                        <input id="capacidad" name="capacidad" type="number" value="<%= capacidad %>" class="form-control input-md" required>
+			                        <input id="capacidad" name="capacidad" type="number" value="<%= capacidad %>" class="form-control input-md">
 			                    </div>
 			                </div>
 
@@ -187,7 +187,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="direccion">Dirección:</label>
 			                    <div class="col-md-4">
-			                        <input id="direccion" name="direccion" type="text" value="<%= direccion %>" class="form-control input-md" required>
+			                        <input id="direccion" name="direccion" type="text" value="<%= direccion %>" class="form-control input-md">
 			                    </div>
 			                </div>
 
@@ -195,7 +195,7 @@
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="telefono">Teléfono</label>
 			                    <div class="col-md-4">
-			                        <input id="telefono" name="telefono" type="number" value="<%= telefono %>" class="form-control input-md" required>
+			                        <input id="telefono" name="telefono" type="number" value="<%= telefono %>" class="form-control input-md">
 			                    </div>
 			                </div>
 

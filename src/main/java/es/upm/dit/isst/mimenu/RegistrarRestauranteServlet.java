@@ -57,8 +57,6 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 	    }
 	}
 	
-	private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		      throws IOException, ServletException {
 		
@@ -66,7 +64,7 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 		REST rest = (REST) sessionOk.getAttribute("userREST");
 		
 		if (rest != null) {
-			response.sendRedirect("/loginrest");
+			response.sendRedirect("/login");
 		} else {
 			//Pasamos el formulario de registro de un restaurante
 			RequestDispatcher view = request.getRequestDispatcher("jsp/restaurante/registroRestaurante.jsp");
@@ -80,11 +78,8 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 		REST rest = (REST) sessionOk.getAttribute("userREST");
 		
 		if (rest != null) {
-			res.sendRedirect("/loginrest");
+			res.sendRedirect("/login");
 		} else {
-			Map<String, java.util.List<BlobKey>> blobs = blobstoreService.getUploads(req);
-
-			List<BlobKey> blobKeys = blobs.get("logo-restaurante");
 			
 			String email = req.getParameter("email");
 			
@@ -97,19 +92,25 @@ public class RegistrarRestauranteServlet extends HttpServlet {
 			
 			String direccion = req.getParameter("direccion");
 			String telefono = req.getParameter("telefono");
-			String logo = blobKeys.get(0).getKeyString();
 			String web = req.getParameter("web");
 			String delivery = req.getParameter("delivery");
 			Boolean del = false;
 			if(delivery.equals("si")){
 				del = true;
 			}
+
+			Map<String, java.util.List<BlobKey>> blobs = BlobstoreServiceFactory.getBlobstoreService().getUploads(req);
+			List<BlobKey> blobKeys = blobs.get("logo-restaurante");
+			if (blobKeys == null || blobKeys.isEmpty() || blobKeys.get(0) == null) {
+				res.sendError(1200);
+			}
+			String logo = blobKeys.get(0).getKeyString();
 			
 			RESTDAO dao = RESTDAOImpl.getInstancia();
 			
 			dao.create(nombre, email, Integer.parseInt(capacidad), encoded, direccion, telefono, logo, web, 0, del);
 			
-			res.sendRedirect("/loginrest");
+			res.sendRedirect("/login");
 		}
 	}
 }

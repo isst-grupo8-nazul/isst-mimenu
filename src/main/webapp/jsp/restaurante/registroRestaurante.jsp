@@ -4,9 +4,7 @@
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 
 <!-- Creo el blobstoreService para poder añadir imágenes -->
-<%
-	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-%>
+<%	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -37,7 +35,7 @@
 
     <!-- Parte del formulario de Registro -->
     <div class="container registro-restaurante">
-        <form method="post" action="<%= blobstoreService.createUploadUrl("/registrarRestaurante") %>" class="form-horizontal" enctype="multipart/form-data">
+        <form method="post" action="<%=blobstoreService.createUploadUrl("/registrarRestaurante")%>" class="form-horizontal" enctype="multipart/form-data">
             <fieldset>
                 <!-- Formulario de Registro -->
                 <legend class="text-center">Registra tu Restaurante</legend>
@@ -69,7 +67,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="logo-restaurante">Logo Restaurante</label>
                     <div class="col-md-4">
-                        <input id="logo-restaurante" name="logo-restaurante" class="input-file" type="file">
+                        <input type="file" id="logo-restaurante" name="logo-restaurante" class="input-file" required>
                     </div>
                 </div>
 
