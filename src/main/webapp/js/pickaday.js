@@ -981,11 +981,8 @@
             if (typeof this._o.onDraw === 'function') {
                 this._o.onDraw(this);
             }
-            
-            if (opts.bound) {
-                // let the screen reader user know to use arrow keys
-                opts.field.setAttribute('aria-label', 'Use the arrow keys to pick a date');
-            }
+          // let the screen reader user know to use arrow keys
+          this._o.field.setAttribute('aria-label', 'Use the arrow keys to pick a date');
         },
 
         adjustPosition: function()

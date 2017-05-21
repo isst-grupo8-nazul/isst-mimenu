@@ -72,11 +72,14 @@
 					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" required>
 
 					<div class="input-group-addon parametro-buscador">
-						<input type="text" id="datepicker" name="fecha" required>
+						<input type="date"  name="fecha" required>
 					</div>
 
 					<div class="input-group-addon parametro-buscador">
-						<input type="time" name="hora" placeholder="Hora" step="1" required>
+						<select>
+						  <option value="comida">Comida</option>
+						  <option value="cena">Cena</option>
+						</select>
 					</div>
 
 					<div class="input-group-addon parametro-buscador">
@@ -279,32 +282,19 @@
 		
 		
 		
-		 var picker = new Pikaday(
-		{
-				field: document.getElementById('datepicker'),
-				closeText: 'Cerrar',
-				prevText: 'mes anterior',
-				nextText: 'mes siguiente',
-				format: "DD/MM/YY",
-				firstDay: 1,
-				dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-				dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-				monthNames:
-				["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-				"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-				monthNamesShort:
-				["Ene", "Feb", "Mar", "Abr", "May", "Jun",
-				"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-				showOtherMonths: true,
-				selectOtherMonths: true,
-				numberOfMonths: 1,
-				changeMonth: true,
-			    changeYear: true,
-				minDate: new Date(), 
-				
-				
-				
-			});
+		 var picker = new Pikaday({
+					        field: document.getElementById('datepicker'),
+					        format: 'DD/MM/YYYY',
+					        firstDay: 1,
+					        minDate: new Date(),
+					        i18n: {
+					           previousMonth : 'Mes Anterior',
+					           nextMonth     : 'Mes Siguiente',
+					           months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+					           weekdays      : ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+					           weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
+						    },
+					    });
 		</script>
 	</body>
 </html>
