@@ -163,6 +163,18 @@
     <servlet-name>ActualizarComensalServlet</servlet-name>
     <url-pattern>/actualizarComensal</url-pattern>
   </servlet-mapping>
+  
+  <!-- Servlet para borrar un menu -->
+  <servlet>
+    <description></description>
+    <display-name>EliminarMenuServlet</display-name>
+    <servlet-name>EliminarMenuServlet</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.EliminarMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminarMenuServlet</servlet-name>
+    <url-pattern>/eliminarMenu</url-pattern>
+  </servlet-mapping>
 
 
 </web-app>

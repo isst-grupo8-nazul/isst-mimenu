@@ -232,6 +232,9 @@
 					  			<a href="#" onclick="event.preventDefault();">
 					  				<%= menu.getTurno() %>
 					  			</a>
+					  			<a href="/eliminarMenu?menuId=<%= menu.getId() %>" class="btn btn-danger" role="button">
+					  				Eliminar Menú
+					  			</a>
 					  		</div>
 					  	</div>
 					</div>
