@@ -31,7 +31,7 @@
 	              <a href="/registrarComensal">Regístrate</a>
 	            </li>
 	            <li>
-	              <a href="/">Ayuda</a>
+	              <a href="/">Ayudaa</a>
 	            </li>
 	          </ul>
 	        </div>
