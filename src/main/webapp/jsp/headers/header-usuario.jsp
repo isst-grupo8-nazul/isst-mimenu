@@ -2,7 +2,7 @@
 <!-- Fixed navbar Usuario Registrado-->
 <nav class="navbar navbar-default navbar-fixed-top">
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <!-- Poner Logo Mimenú -->
+            <!-- Poner Logo Mimen� -->
             <a id="logo" class="navbar-brand" href="/"><img src="../img/logo-blanco.png"></a>
         </div>
 
@@ -24,7 +24,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Reservas <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul id="menu-rest" class="dropdown-menu">
                         <!-- Aquí iran las reservas activas del usuario y el botón para ver todas sus reservas -->
                         <!--
                         Comprobar si hay reservas
@@ -49,23 +49,32 @@
                         <!-- Insertar el nombre del usuario -->
                         ${param.nombre} <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul id="menu-rest" class="dropdown-menu">
                         <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
                         <li>
-                            <a href="/showReservasComensal">Mis Reservas</a>
+                            <a href="/showReservasComensal">
+                                <i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+                                Mis Reservas
+                            </a>
                         </li>
                         <li>
-                            <a href="/ajustes">Mis Ajustes</a>
+                            <a href="/login">
+                                <i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
+                                Mi Perfil
+                            </a>
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="/logout">Desconectar</a>
+                            <a href="/logout">
+                                <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
+                                Desconectar
+                            </a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="/ayuda">Ayuda</a>
+                    <a href="/">Ayuda</a>
                 </li>
             </ul>
         </div><!--/.nav-collapse -->

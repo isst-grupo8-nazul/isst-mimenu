@@ -44,52 +44,62 @@ public class ReservaMenuCOMENSALServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		
-		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
+		System.out.println("Estoy en el inicio del metodo doGet de ReservaMenuComensalServlet");
 		
+		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
+
 		PLATODAO platoDao = PLATODAOImpl.getInstancia();
 		RESTDAO restDao = RESTDAOImpl.getInstancia();
 		MENUDAO menuDao = MENUDAOImpl.getInstancia();
-		
+
 		if (comensal != null){
-			
-			
+
+			System.out.println("Estoy en el metodo doGet de ReservaMenuComensalServlet dentro de comensal!=null");
+
 			PLATO primero = platoDao.readById(Long.parseLong(req.getParameter("primero")));
 			PLATO segundo = platoDao.readById(Long.parseLong(req.getParameter("segundo")));
 			PLATO postre = platoDao.readById(Long.parseLong(req.getParameter("postre")));
 			MENU menu = menuDao.read(primero.getMenuId());
 			REST rest = restDao.read(primero.getRestEmail());
-			
+
 			PLATO[] platos = {primero, segundo, postre};
-			
+
 			String bebida = req.getParameter("bebida");
-			
+
 			req.getSession().setAttribute("platos", platos);
 			req.getSession().setAttribute("menu", menu);
 			req.getSession().setAttribute("bebida", bebida);
 			req.getSession().setAttribute("rest", rest);
-		
+
+			System.out.println("Estoy en el metodo doGet de ReservaMenuComensalServlet en comensal != null antes de reqDispatcher");
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/pagoReserva.jsp");
+			System.out.println("Estoy en el metodo doGet de ReservaMenuComensalServlet en comensal != null despues de reqDispatcher");
 			view.forward(req, res);
 		}else{
+			System.out.println("Estoy en el metodo doGet de ReservaMenuComensalServlet en comensal == null antes de reqDispatcher");
 			res.sendRedirect("/login");
 		}
 	}
-	
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		System.out.println("Estoy en el metodo doPost de ReservaMenuComensalServlet");
+
 		HttpSession sessionOk = req.getSession();
 		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
 		MENU menu = (MENU) sessionOk.getAttribute("menu");
 		PLATO[] platos = (PLATO[]) sessionOk.getAttribute("platos");
 		String bebida = (String) sessionOk.getAttribute("bebida");
 		REST rest = (REST) sessionOk.getAttribute("rest");
-		
+
 		RESERVADAO reservaDao = RESERVADAOImpl.getInstancia();
 		for(PLATO plato : platos){
 			reservaDao.create(null, comensal.getId(), rest.getEmail(), menu.getId(), plato.getId(), bebida);
 		}
-		
+
 		//Mandar correo a restaurante
-		
+		System.out.println("Estoy en el metodo doPost de ReservaMenuComensalServlet antes de redirect");
 		res.sendRedirect("/showReservasComensal");
 	}
 }

@@ -35,40 +35,48 @@ public class SearchMenusServlet extends HttpServlet {
 		ObjectifyService.register(PLATO.class);
 		ObjectifyService.register(RESERVA.class);
 	}
-	
-	
-	
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+		      throws IOException, ServletException {
+
+		doPost(req, res);
+	}
+
 	public void doPost(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
+
 		String fecha = req.getParameter("fecha");
-		
 		String turno = req.getParameter("turno");
-		
+		System.out.println(fecha);
+		System.out.println(turno);
+
 		PLATODAO platoDao = PLATODAOImpl.getInstancia();
 		MENUDAO menuDao = MENUDAOImpl.getInstancia();
 		RESTDAO restDao = RESTDAOImpl.getInstancia();
-		
+
 		List<MENU> menus = menuDao.readByFecha(fecha);
 		List<PLATO> platos = new ArrayList<PLATO>();
 		List<REST> rests = new ArrayList<REST>();
-		
+
 		for(MENU menu : menus){
+			System.out.println(menu.getNombre());
 			List<PLATO> platosaux = platoDao.readByMenu(menu.getId()); 
 			for(PLATO plato:platosaux)
 				if(!platos.contains(plato)){
 					platos.add(plato);
 				}
-			rests.add(restDao.read(menu.getRestEmail()));
-		}		
-		
+			if (!rests.contains(restDao.read(menu.getRestEmail()))){
+				rests.add(restDao.read(menu.getRestEmail()));
+			}
+		}
+
 		req.getSession().setAttribute("menus", menus);
 		req.getSession().setAttribute("platos", platos);
 		req.getSession().setAttribute("turno", turno);
 		req.getSession().setAttribute("rests", rests);
-		
+		req.getSession().setAttribute("fecha", fecha);
+
 		RequestDispatcher view = req.getRequestDispatcher("jsp/showMenusAll.jsp");
 		view.forward(req, res);
-		
-		
 	}
 }

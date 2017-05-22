@@ -27,7 +27,7 @@ import es.upm.dit.isst.mimenu.model.PLATO;
 import es.upm.dit.isst.mimenu.model.RESERVA;
 import es.upm.dit.isst.mimenu.model.REST;
 
-public class ActualizarRESTServlet extends HttpServlet{
+public class ActualizarComensalServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -52,12 +52,13 @@ public class ActualizarRESTServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
 		HttpSession sessionOk = req.getSession();
-		REST restSession = (REST) sessionOk.getAttribute("userREST");
-		if (restSession == null) {
+		COMENSAL comensalSession = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
+		
+		if (comensalSession == null) {
 			res.sendRedirect("/login");
 		}else{
 
-			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
 		}
 		
@@ -67,60 +68,49 @@ public class ActualizarRESTServlet extends HttpServlet{
 		      throws IOException, ServletException {
 		
 		HttpSession sessionOk = req.getSession();
-		REST restSession = (REST) sessionOk.getAttribute("userREST");
+		COMENSAL comensalSession = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
 		
-		if (restSession == null) {
+		if (comensalSession == null) {
 			
 			res.sendRedirect("/login");
 			
 		}else{
-			RESTDAO dao = RESTDAOImpl.getInstancia();
+			COMENSALDAO dao = COMENSALDAOImpl.getInstancia();
 			
 			System.out.println(req.getParameter("email"));
 			System.out.println(req.getParameter("nombre"));
 			System.out.println(req.getParameter("password"));
-			System.out.println(req.getParameter("capacidad"));
 			System.out.println(req.getParameter("direccion"));
 			System.out.println(req.getParameter("telefono"));
-			System.out.println(req.getParameter("web"));
-			System.out.println(req.getParameter("delivery"));
 			
-			REST rest = dao.read(req.getParameter("email"));
+			COMENSAL comensal = dao.read(req.getParameter("email"));
 			
-			String nombre = (req.getParameter("nombre") != null && req.getParameter("nombre") != "") ? req.getParameter("nombre"):restSession.getNombre();
+			String nombre = (req.getParameter("nombre") != null && req.getParameter("nombre") != "") ? req.getParameter("nombre"):comensalSession.getNombre();
 			String password = "";
 			String encoded = "";
 			if (req.getParameter("password") != null && req.getParameter("password") != "") {
 				password = req.getParameter("password");
 				encoded = sha256(password);
 			} else {
-				password = restSession.getPassword();
-				encoded = restSession.getPassword();
+				password = comensalSession.getPassword();
+				encoded = comensalSession.getPassword();
 			}
+			
 			System.out.println(password);
-			String capacidad = req.getParameter("capacidad");
+			
 			String direccion = req.getParameter("direccion");
 			String telefono = req.getParameter("telefono");
-			String web = (req.getParameter("web") != null && req.getParameter("web") != "") ? req.getParameter("web"):restSession.getWeb();
-			String delivery = req.getParameter("delivery");
-			Boolean del = false;
-			if(delivery.equals("si")){
-				del = true;
-			}
 			
-			rest.setNombre(nombre);
-			rest.setPassword(encoded);
-			rest.setCapacidad(Integer.parseInt(capacidad));
-			rest.setDireccion(direccion);
-			rest.setTelefono(telefono);
-			rest.setWeb(web);
-			rest.setDelivery(del);
+			comensal.setNombre(nombre);
+			comensal.setPassword(encoded);
+			comensal.setDireccion(direccion);
+			comensal.setTelefono(telefono);
 			
-			rest = dao.updateREST(rest);
+			comensal = dao.updateCOMENSAL(comensal);
 			
-			sessionOk.setAttribute("userREST", rest);
+			sessionOk.setAttribute("userCOMENSAL", comensal);
 			
-			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
 		}
 	}

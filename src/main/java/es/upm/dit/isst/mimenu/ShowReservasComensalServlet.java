@@ -38,48 +38,46 @@ public class ShowReservasComensalServlet extends HttpServlet{
 		ObjectifyService.register(PLATO.class);
 		ObjectifyService.register(RESERVA.class);
 	}
-	
-	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
 		      throws IOException, ServletException {
 		COMENSAL comensal = (COMENSAL) req.getSession().getAttribute("userCOMENSAL");
-		
+
 		if (comensal != null){
 			RESERVADAO reservaDao = RESERVADAOImpl.getInstancia();
 			PLATODAO platoDao = PLATODAOImpl.getInstancia();
 			RESTDAO restDao = RESTDAOImpl.getInstancia();
 			MENUDAO menuDao = MENUDAOImpl.getInstancia();
-			
+
 			List<RESERVA> reservas = reservaDao.readByComensalId(comensal.getId());
-			
+
 			List<MENU> menus = new ArrayList<MENU>();
 			List<REST> rests = new ArrayList<REST>();
 			List<PLATO> platos = new ArrayList<PLATO>();
-			
-			
+
 			for(RESERVA reserva: reservas){
 				MENU menu = menuDao.read(reserva.getMenuId());
 				if(menu != null && !menus.contains(menu)){
 					menus.add(menu);
 				}
-				
+
 				REST rest = restDao.read(reserva.getRestEmail());
 				if(rest !=null && !rests.contains(rest)){
 					rests.add(rest);
 				}
-				
+
 				PLATO plato = platoDao.readById(reserva.getPlatoId());
 				if(plato !=null && !platos.contains(plato)){
 					platos.add(plato);
 				}
-				
+
 			}
-			
-			
+
 			req.getSession().setAttribute("reservas", reservas);
 			req.getSession().setAttribute("platos", platos);
 			req.getSession().setAttribute("menus", menus);
 			req.getSession().setAttribute("rests", rests);
-			
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/showReservasComensal.jsp");
 			view.forward(req, res);
 		}else{

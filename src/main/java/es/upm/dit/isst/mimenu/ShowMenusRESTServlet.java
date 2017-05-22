@@ -50,7 +50,6 @@ public class ShowMenusRESTServlet extends HttpServlet {
 			
 			List<MENU> menus = menuDao.readByRest(rest.getEmail());
 			List<PLATO> platos = platosDao.readByREST(rest.getEmail());
-			
 					
 			req.getSession().setAttribute("menusREST", menus);
 			req.getSession().setAttribute("platosREST", platos);

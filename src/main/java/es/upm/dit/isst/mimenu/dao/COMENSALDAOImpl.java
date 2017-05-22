@@ -35,8 +35,7 @@ public class COMENSALDAOImpl implements COMENSALDAO {
 		
 		COMENSAL comensal = ofy().load().type(COMENSAL.class).filter("email", email).first().now();
 		return comensal;
-		
-		
+
 	}
 	
 	@Override

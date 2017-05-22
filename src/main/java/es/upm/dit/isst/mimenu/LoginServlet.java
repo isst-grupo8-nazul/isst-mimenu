@@ -36,9 +36,9 @@ public class LoginServlet extends HttpServlet{
 		ObjectifyService.register(PLATO.class);
 		ObjectifyService.register(RESERVA.class);
 	}
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	public static String sha256(String base) {
 	    try{
 	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -56,28 +56,32 @@ public class LoginServlet extends HttpServlet{
 	       throw new RuntimeException(ex);
 	    }
 	}
-	
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
-		
+
 		HttpSession sessionOk = req.getSession();
 		REST restSession = (REST) sessionOk.getAttribute("userREST");
 		COMENSAL comensalSession = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
-		
+
 		if (restSession != null) {
-			
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			view.forward(req, res);
-			
+
 		} else if(comensalSession != null){
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
+
 		}else{
+
 			String busqueda = req.getParameter("busqueda");
-			if (busqueda.equals("true")){
+
+			if (busqueda != null && busqueda.equals("busqueda")){
 				boolean login = true;
 				req.setAttribute("login", login);
-				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
+				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp?busqueda=busqueda");
 				view.forward(req, res);
 			} else {
 				boolean login = true;
@@ -85,76 +89,87 @@ public class LoginServlet extends HttpServlet{
 				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
 				view.forward(req, res);
 			}
-		
 		}
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) 
 		      throws IOException, ServletException {
-		
+
 		HttpSession sessionOk = req.getSession();
 		REST restSession = (REST) sessionOk.getAttribute("userREST");
 		COMENSAL comensalSession=(COMENSAL) sessionOk.getAttribute("userCOMENSAL");
-		
+
 		if (restSession != null) {
-			
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
 			view.forward(req, res);
-			
+
 		} else if (comensalSession != null){
-			
+
 			RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
 			view.forward(req, res);
-			
+
 		}else{
 			RESTDAO restDao = RESTDAOImpl.getInstancia();
 			COMENSALDAO comensalDao = COMENSALDAOImpl.getInstancia();
 
 			if (req.getSession().getAttribute("userREST") == null && req.getSession().getAttribute("userCOMENSAL") == null){
+
+				String busqueda = req.getParameter("busqueda");
 				String email = req.getParameter("email");
 				String password = req.getParameter("password");
-				
+
 				String encoded = sha256(password);
-				
-				 REST rest = restDao.read(email);
-				 COMENSAL comensal = comensalDao.read(email);
-				 
-				
-				 
-				 if(rest != null && rest.getPassword().equals(encoded)){
-					 req.getSession().setAttribute("userREST", rest);
-					 
-					 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
-					 view.forward(req, res);
-				 }else if(comensal != null && comensal.getPassword().equals(encoded)){
-					 req.getSession().setAttribute("userCOMENSAL", comensal);
-					 MENUDAO menuDao = MENUDAOImpl.getInstancia();
-					 PLATODAO platosDao = PLATODAOImpl.getInstancia();
-					 
-					
-					 List<MENU> menus = menuDao.read();
-					 List<PLATO> platos = platosDao.read();
-					 List<REST> rests = restDao.read();
-					
-							
-					 req.getSession().setAttribute("menusCOMENSAL", menus);
-					 req.getSession().setAttribute("platosCOMENSAL", platos);
-					 req.getSession().setAttribute("restsCOMENSAL", rests);
-					 RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
-					 view.forward(req, res);
-				 }else{	 
-					 req.getSession().setAttribute("messageLogin", "Password incorrecto");
-					 RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
-					 view.forward(req, res);
-				 }
 
+				REST rest = restDao.read(email);
+				COMENSAL comensal = comensalDao.read(email);
+
+				if(rest != null && rest.getPassword().equals(encoded)){
+
+					req.getSession().setAttribute("userREST", rest);
+
+					RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
+					view.forward(req, res);
+
+				}else if (comensal != null && comensal.getPassword().equals(encoded)){
+
+					req.getSession().setAttribute("userCOMENSAL", comensal);
+					MENUDAO menuDao = MENUDAOImpl.getInstancia();
+					PLATODAO platosDao = PLATODAOImpl.getInstancia();
+
+
+					List<MENU> menus = menuDao.read();
+					List<PLATO> platos = platosDao.read();
+					List<REST> rests = restDao.read();
+
+					req.getSession().setAttribute("menusCOMENSAL", menus);
+					req.getSession().setAttribute("platosCOMENSAL", platos);
+					req.getSession().setAttribute("restsCOMENSAL", rests);
+
+					if ( busqueda != null && busqueda.equals("busqueda")) {
+
+						String fecha = (String) req.getSession().getAttribute("fecha");
+						String turno = (String) req.getSession().getAttribute("turno");
+
+						res.sendRedirect("/buscar?fecha="+fecha+"&turno="+turno);
+
+					} else {
+
+						RequestDispatcher view = req.getRequestDispatcher("jsp/comensal/perfil-comensal.jsp");
+						view.forward(req, res);
+					}
+				}else{
+
+					req.getSession().setAttribute("messageLogin", "Password incorrecto");
+					RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
+					view.forward(req, res);
+				}
 			}else{
-				
-				 req.getSession().setAttribute("messageLogin", "Usuario incorrecto");
-				 RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/perfil-restaurante.jsp");
-				 view.forward(req, res);
-			}
 
+				req.getSession().setAttribute("messageLogin", "Usuario incorrecto");
+				RequestDispatcher view = req.getRequestDispatcher("jsp/landing.jsp");
+				view.forward(req, res);
+			}
 		}
 	}
 }

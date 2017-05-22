@@ -21,8 +21,7 @@
 <%@ page import="es.upm.dit.isst.mimenu.dao.RESTDAOImpl" %>
 
 <%
-	
-	
+
 	HttpSession sessionOk = request.getSession();
 
 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
@@ -30,13 +29,9 @@
 	List<MENU> menus = (List<MENU>) sessionOk.getAttribute("menus");
 	List<REST> rests = (List<REST>) sessionOk.getAttribute("rests");
 	List<PLATO> platos = (List<PLATO>) sessionOk.getAttribute("platos");
-	
-	
-	
-	
 
 	if (comensal == null) {
-		RequestDispatcher viewer = request.getRequestDispatcher("jsp/restuarante/registroComensal.jsp");
+		RequestDispatcher viewer = request.getRequestDispatcher("jsp/comensal/registroComensal.jsp");
 		viewer.forward(request, response);
 	}
 
@@ -63,7 +58,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/perfil-restaurante.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		
+
   		<style>
 			#showReservas ul {
 			    list-style-type: none;
@@ -93,7 +88,7 @@
 					<div class="profile-sidebar">
 						<!-- SIDEBAR USERPIC -->
 						<div class="profile-userpic">
-							<img src="./img/teimoso.gif" class="img-responsive" alt="">
+							<img src="./../../img/user.png" class="img-responsive" alt="">
 						</div>
 						<!-- END SIDEBAR USERPIC -->
 						<!-- SIDEBAR USER TITLE -->
@@ -108,9 +103,9 @@
 						<!-- END SIDEBAR USER TITLE -->
 						<!-- SIDEBAR BUTTONS -->
 						<div class="profile-userbuttons">
-							<a href="/registraMenu" type="button" class="btn btn-success btn-sm">
-								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
-								Reservas
+							<a href="/showReservasComensal" type="button" class="btn btn-success btn-sm">
+								<i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+								Mis Reservas
 							</a>
 							<a href="/logout" type="button" class="btn btn-danger btn-sm">
 								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
@@ -124,19 +119,19 @@
 								<li id="perfil" >
 									<a href="/login">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
-										Menus Disponibles
+										Mi Perfil
 									</a>
 								</li>
 								<li id="publicar-menu" class="active">
 									<a href="/showReservasComensal">
-										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
-										Reservas
+										<i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+										Mis Reservas
 									</a>
 								</li>
 								<li id="mis-ajustes">
-									<a href="#">
-										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
-										Ver comentarios
+									<a href="/">
+										<i class="fa fa-search fa-fw" aria-hidden="true"></i>&nbsp;
+										Buscar Menús
 									</a>
 								</li>
 								<li id="logout">
@@ -151,21 +146,17 @@
 					</div>
 				</div>
 
-					
 				<div id="showReservas" class="col-sm-9">
 					<% if(!menus.isEmpty()){
-						
-						for(MENU menu : menus){ 
+
+						for(MENU menu : menus){
 							String bebida="Ron-Cola";
 							for(RESERVA reserva : reservas){
 								if(reserva.getMenuId().equals(menu.getId())){
-									
 									bebida = reserva.getBebida();
 									break;
 								}
 							}
-							
-						
 						%>
 						<div class="panel panel-info">
 							<div class="panel-heading">
@@ -177,11 +168,10 @@
 								</h3>
 							</div>
 						  	<div class="panel-body">
-						  	  
 						  		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						  			<% for(REST rest : rests){
 						  				if(rest.getEmail().equals(menu.getRestEmail())){ %>
-						  				 <h4><%= rest.getNombre() %></h4>
+						  					<h4><%= rest.getNombre() %></h4>
 						  			<% } } %>
 						  		</div>
 							  	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -229,54 +219,43 @@
 							  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 							  		<h4><strong>Bebida</strong></h4>
 							  		<ul>
-							  			
-							  				<li>
-							  					<%= bebida %>
-							  				</li>
-							  			
+						  				<li>
+						  					<%= bebida %>
+						  				</li>
 							  		</ul>
 							  	</div>
 						  		<div class="tags col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						  			<a href="#" onclick="event.preventDefault();" class="info">
 						  				Pagado</i>
 						  			</a>
-						  			
 						  		</div>
-						  		</form>
-						  			
-						  		
 						  	</div>
 						</div>
 					<% } }else{%>
 						<p>No tienes reservas por ahora</p>
 					<% } %>
-					</div>
-						
-						
-						
-						
-					</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- Parte del footer -->
 		<jsp:include page="../footer/footer.jsp"/>
-	<script>
-		$(function(){
-		
-			$('#slide-submenu').on('click',function() {			        
-		        $(this).closest('.list-group').fadeOut('slide',function(){
-		        	$('.mini-submenu').fadeIn();	
-		        });
-		        
-		      });
-		
-			$('.mini-submenu').on('click',function(){		
-		        $(this).next('.list-group').toggle('slide');
-		        $('.mini-submenu').hide();
-			})
-		})
 
-	</script>
+		<script>
+			$(function(){
+
+				$('#slide-submenu').on('click',function() {
+			        $(this).closest('.list-group').fadeOut('slide',function(){
+			        	$('.mini-submenu').fadeIn();
+			        });
+			      });
+
+				$('.mini-submenu').on('click',function(){
+			        $(this).next('.list-group').toggle('slide');
+			        $('.mini-submenu').hide();
+				})
+			})
+
+		</script>
 	</body>
 </html>

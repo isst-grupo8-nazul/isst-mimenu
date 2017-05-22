@@ -101,7 +101,7 @@
 						<div class="profile-usermenu">
 							<ul class="nav">
 								<li id="perfil" class="active">
-									<a href="/loginrest">
+									<a href="/login">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Perfil
 									</a>
@@ -183,7 +183,7 @@
 			                    </div>
 			                </div>
 
-			                <!-- Dirección´-->
+			                <!-- Dirección -->
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="direccion">Dirección:</label>
 			                    <div class="col-md-4">

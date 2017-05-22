@@ -9,11 +9,15 @@
 <%@ page import="es.upm.dit.isst.mimenu.model.MENU" %>
 <%@ page import="es.upm.dit.isst.mimenu.model.PLATO" %>
 
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobKey" %>
+
 <%
 	HttpSession sessionOk = request.getSession();
 
 	REST rest = (REST) sessionOk.getAttribute("userREST");
-	
+
 	List<MENU> menus = (List<MENU>) sessionOk.getAttribute("menusREST");
 	List<PLATO> platos = (List<PLATO>) sessionOk.getAttribute("platosREST");
 
@@ -29,6 +33,12 @@
 	String web = rest.getWeb();
 	int capacidad = rest.getCapacidad();
 	String delivery = (rest.isDelivery()) ? "si":"no";
+
+	String logo = rest.getLogo();
+%>
+
+<%
+	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 %>
 
 <!DOCTYPE html>
@@ -76,7 +86,7 @@
 					<div class="profile-sidebar">
 						<!-- SIDEBAR USERPIC -->
 						<div class="profile-userpic">
-							<img src="../../img/teimoso.gif" class="img-responsive" alt="">
+							<img src="/serve-image?blob-key=<%= logo %>" class="img-responsive" alt="">
 						</div>
 						<!-- END SIDEBAR USERPIC -->
 						<!-- SIDEBAR USER TITLE -->
@@ -104,31 +114,31 @@
 						<!-- SIDEBAR MENU -->
 						<div class="profile-usermenu">
 							<ul class="nav">
-								<li>
-									<a href="/loginrest">
+								<li id="perfil">
+									<a href="/login">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
 										Perfil
 									</a>
 								</li>
-								<li>
+								<li id="publicar-menu">
 									<a href="/registraMenu">
 										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
 										Publicar Menú
 									</a>
 								</li>
-								<li class="active">
+								<li id="mis-menus" class="active">
 									<a href="/showMenusRest">
 										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
 										Mis Menús
 									</a>
 								</li>
-								<li>
-									<a href="#">
+								<li id="mis-ajustes">
+									<a href="#" target="_blank">
 										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
-										Ver Comentarios
+										Ver comentarios
 									</a>
 								</li>
-								<li>
+								<li id="logout">
 									<a href="/logout">
 										<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
 										Logout

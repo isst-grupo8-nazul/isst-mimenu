@@ -12,7 +12,9 @@
 	HttpSession sessionOk = request.getSession();
 
 	REST rest = (REST) sessionOk.getAttribute("userREST");
- 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");	
+ 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
+
+ 	String busqueda = (String) request.getParameter("busqueda");
 %>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
 		<!-- Estilos y js Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
-		
+
 		<!-- enlazo mis propios estilos -->
 		<link rel="stylesheet" type="text/css" href="../css/landing.css">
 		<link rel="stylesheet" href="../css/pickaday.css">
@@ -50,7 +52,7 @@
 			String telefonoRest = rest.getTelefono();
 			String webRest = rest.getWeb();
 			int capacidadRest = rest.getCapacidad();
-			String deliveryRest = (rest.isDelivery()) ? "si":"no";	
+			String deliveryRest = (rest.isDelivery()) ? "si":"no";
 		%>
 	    	<jsp:include page="./headers/header-restaurante.jsp">
 	    		<jsp:param name="nombre" value="<%= nombreRest %>" />
@@ -60,7 +62,13 @@
 				<jsp:param name="nombre" value="<%= comensal.getNombre() %>" />
 	    	</jsp:include>
 		<% } else { %>
-			<jsp:include page="./headers/header.jsp"/>
+			<% if (busqueda != null && busqueda.equals("busqueda")) { %>
+				<jsp:include page="./headers/header.jsp">
+						<jsp:param name="busqueda" value="<%= busqueda %>" />
+				</jsp:include>
+			<% } else { %>
+				<jsp:include page="./headers/header.jsp"/>
+			<% } %>
 		<% } %>
 		<!-- Parte de la imagen de fondo con buscador -->
 		<div class="jumbotron text-center">
@@ -69,7 +77,7 @@
 			<form action="/buscar" method="POST" class="form-inline">
 
 				<div class="input-group">
-					<input type="email" class="form-control" size="50" id="" placeholder="Busca tu menú" >
+					<input type="email" class="form-control" size="50" id="" placeholder="Nombre de restuarante, Código Postal..." >
 
 					<div class="input-group-addon parametro-buscador" required>
 						<input type="date"  name="fecha" required>
@@ -115,104 +123,106 @@
 		</div>
 
 		<!-- Restaurantes destacados -->
-		<div class="container text-center destacados">
-			<h3>RESTAURANTES DESTACADOS</h3>
-			<!-- Parte de las fichas de restaurantes -->
-			<div class="row fichas-restaurantes">
-				<div class="col-sm-6 ficha-restaurante">
-					<div class="row">
-						<div class="imagen-restaurante-div img-responsive col-xs-3">
-							<img class="imagen-restaurante" src="../img/buscar.jpg">
-						</div>
-						<div class="col-xs-5">
-							<h2>NOMBRE</h2><br>
-							<p><em>Dirección restaurante</em></p><br>
-							<div class="row">
-								<div class="col-xs-6">
-									<span class="label label-info">
-										<span class="glyphicon glyphicon-tag"></span>Etiq.1
-									</span>
-								</div>
-								<div class="col-xs-6">
-									<span class="label label-info">
-										<span class="glyphicon glyphicon-tag"></span>Etiq.2
-									</span>
-								</div>
+		<div class="container-fluid" style="background-color:#e8e8e8">
+			<div class="container container-pad	 text-center destacados">
+				<h3>RESTAURANTES DESTACADOS</h3>
+				<!-- Parte de las fichas de restaurantes -->
+				<div class="row fichas-restaurantes">
+					<div class="col-sm-6 ficha-restaurante brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+						<div class="row">
+							<div class="imagen-restaurante-div img-responsive col-xs-3">
+								<img class="imagen-restaurante" src="./../img/maki.gif">
 							</div>
-							<div id="stars" class="starrr"></div>
-						</div>
-						<div class="col-xs-4">
-							<h2>MENÚ</h2>
-							<h1>15 <i class="fa fa-eur" aria-hidden="true"></i></h1>
-							<ul class="menu-opciones">
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-coffe fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-smile-o fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-							</ul>
+							<div class="col-xs-5">
+								<h2>MAKI SUSHI POZUELO</h2><br>
+								<p><em>Calle Irlanda, 38 28224</em></p><br>
+								<div class="row">
+									<div class="col-xs-6">
+										<span class="label label-info">
+											<span class="glyphicon"><i class="fa fa-beer fa-fw" aria-hidden="true"></i>&nbsp;</span>Chino
+										</span>
+									</div>
+									<div class="col-xs-6">
+										<span class="label label-info">
+											<span class="glyphicon"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;</span>Etiq.2
+										</span>
+									</div>
+								</div>
+								<div id="stars" class="starrr"></div>
+							</div>
+							<div class="col-xs-4">
+								<h2>MENÚ</h2>
+								<h1>15 <i class="fa fa-eur" aria-hidden="true"></i></h1>
+								<ul class="menu-opciones">
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-coffe fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-smile-o fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="col-sm-6 ficha-restaurante">
-					<div class="row">
-						<div class="img-responsive col-xs-3">
-							<img class="imagen-restaurante" src="../img/teimoso.gif">
-						</div>
-						<div class="col-xs-5">
-							<h2>NOMBRE</h2><br>
-							<p><em>Dirección restaurante</em></p><br>
-							<div class="row">
-								<div class="col-xs-6">
-									<span class="label label-info">
-										<span class="glyphicon glyphicon-tag"></span>Etiq.1
-									</span>
-								</div>
-								<div class="col-xs-6">
-									<span class="label label-info">
-										<span class="glyphicon glyphicon-tag"></span>Etiq.2
-									</span>
-								</div>
+	
+					<div class="col-sm-6 ficha-restaurante brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+						<div class="row">
+							<div class="img-responsive col-xs-3">
+								<img class="imagen-restaurante" src="./../img/goiko.svg">
 							</div>
-							<div id="stars" class="starrr"></div>
-						</div>
-						<div class="col-xs-4">
-							<h2>MENÚ</h2>
-							<h1>15 <i class="fa fa-eur" aria-hidden="true"></i></h1>
-							<ul class="menu-opciones">
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-coffe fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-								<li class="menu-opciones-opcion">
-									<span class="fa-stack fa-lg">
-									<i class="fa fa-circle fa-stack-2x"></i>
-  									<i class="fa fa-smile-o fa-stack-1x fa-inverse"></i>
-									</span>
-								</li>
-							</ul>
+							<div class="col-xs-5">
+								<h2>GOIKO GRILL POZUELO</h2><br>
+								<p><em>Calle Francia, 2 28224</em></p><br>
+								<div class="row">
+									<div class="col-xs-6">
+										<span class="label label-info">
+											<span class="glyphicon"><i class="fa fa-coffee fa-fw" aria-hidden="true"></i>&nbsp;</span>Etiq.1
+										</span>
+									</div>
+									<div class="col-xs-6">
+										<span class="label label-info">
+											<span class="glyphicon"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;</span>Etiq.2
+										</span>
+									</div>
+								</div>
+								<div id="stars" class="starrr"></div>
+							</div>
+							<div class="col-xs-4">
+								<h2>MENÚ</h2>
+								<h1>15 <i class="fa fa-eur" aria-hidden="true"></i></h1>
+								<ul class="menu-opciones">
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-coffe fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-motorcycle fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+									<li class="menu-opciones-opcion">
+										<span class="fa-stack fa-lg">
+										<i class="fa fa-circle fa-stack-2x"></i>
+	  									<i class="fa fa-smile-o fa-stack-1x fa-inverse"></i>
+										</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -278,23 +288,5 @@
 				});
 			</script>
 		</c:if>
-		<script type="text/javascript">
-		
-		
-		
-		 var picker = new Pikaday({
-					        field: document.getElementById('datepicker'),
-					        format: 'DD/MM/YYYY',
-					        firstDay: 1,
-					        minDate: new Date(),
-					        i18n: {
-					           previousMonth : 'Mes Anterior',
-					           nextMonth     : 'Mes Siguiente',
-					           months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-					           weekdays      : ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-					           weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
-						    },
-					    });
-		</script>
 	</body>
 </html>

@@ -22,12 +22,11 @@
 	            <li>
 	              <a href="/registrarRestaurante">Registra Tu Restaurante</a>
 	            </li>
-	            
+
 	            <li>
 	              <a href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
 	            </li>
-	            
-	            
+
 	            <li>
 	              <a href="/registrarComensal">Regístrate</a>
 	            </li>
@@ -61,6 +60,7 @@
                                 <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-login-msg">Introduce tu Email y contraseña</span>
                             </div>
+                            <input type="hidden" name="busqueda" value="${param.busqueda}">
 				    		<input id="login_username" class="form-control" type="text" placeholder="Email" name="email" required>
 				    		<input id="login_password" class="form-control" type="password" placeholder="Contraseña" name="password" required>
                             <div class="checkbox">

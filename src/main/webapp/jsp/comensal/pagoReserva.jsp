@@ -12,23 +12,24 @@
 <%@ page import="java.text.DecimalFormat" %>
 
 <%
+	System.out.println("He llegado al inicio de pagoReserva.jsp");
 	HttpSession sessionOk = request.getSession();
 
 	COMENSAL comensal = (COMENSAL) sessionOk.getAttribute("userCOMENSAL");
-	
+
 	MENU menu = (MENU) sessionOk.getAttribute("menu");
 	PLATO[] platos = (PLATO[]) sessionOk.getAttribute("platos");
 	String bebida = (String) sessionOk.getAttribute("bebida");
 	REST rest = (REST) sessionOk.getAttribute("rest");
 
 	if (comensal == null) {
-		RequestDispatcher viewer = request.getRequestDispatcher("jsp/restuarante/registroComensal.jsp");
+		RequestDispatcher viewer = request.getRequestDispatcher("jsp/comensal/registroComensal.jsp");
 		viewer.forward(request, response);
 	}
-	
-	DecimalFormat df = new DecimalFormat("#.##");
-	double sb = new Double(df.format(menu.getPrecio() * 0.79));
-	double iva = new Double(df.format(menu.getPrecio() * 0.21));
+
+	DecimalFormat df = new DecimalFormat("####.##");
+	String sb = df.format(menu.getPrecio() * 0.79);
+	String iva = df.format(menu.getPrecio() * 0.21);
 
 	String nombre = comensal.getNombre();
 	String email = comensal.getEmail();
@@ -53,7 +54,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/perfil-restaurante.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		
+
   		<style>
 			#ticket ul {
 			    list-style-type: none;
@@ -123,7 +124,7 @@
 					<div class="profile-sidebar">
 						<!-- SIDEBAR USERPIC -->
 						<div class="profile-userpic">
-							<img src="./img/teimoso.gif" class="img-responsive" alt="">
+							<img src="./../../img/user.png" class="img-responsive" alt="">
 						</div>
 						<!-- END SIDEBAR USERPIC -->
 						<!-- SIDEBAR USER TITLE -->
@@ -139,8 +140,8 @@
 						<!-- SIDEBAR BUTTONS -->
 						<div class="profile-userbuttons">
 							<a href="/showReservasComensal" type="button" class="btn btn-success btn-sm">
-								<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
-								Reservas
+								<i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+								Mis Reservas
 							</a>
 							<a href="/logout" type="button" class="btn btn-danger btn-sm">
 								<i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp;
@@ -151,28 +152,22 @@
 						<!-- SIDEBAR MENU -->
 						<div class="profile-usermenu">
 							<ul class="nav">
-								<li id="perfil" class="active">
+								<li id="perfil">
 									<a href="/login">
 										<i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;
-										Menus Disponibles
+										Mi Perfil
 									</a>
 								</li>
-								<li id="publicar-menu">
+								<li id="publicar-menu" class="active">
 									<a href="/showReservasComensal">
-										<i class="fa fa-upload fa-fw" aria-hidden="true"></i>&nbsp;
-										Reservas
-									</a>
-								</li>
-								<li id="mis-menus">
-									<a href="/showMenusRest">
-										<i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;
-										Mis Menús
+										<i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+										Mis Reservas
 									</a>
 								</li>
 								<li id="mis-ajustes">
-									<a href="#">
-										<i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;
-										Ver comentarios
+									<a href="/">
+										<i class="fa fa-search fa-fw" aria-hidden="true"></i>&nbsp;
+										Buscar Menús
 									</a>
 								</li>
 								<li id="logout">
@@ -187,9 +182,8 @@
 					</div>
 				</div>
 
-					
 				<div id="ticket" class="col-sm-9 col-md-9 col-lg-9">
-				
+
 					<div class="container-fluid">
 					    <div class="row">
 					        <div class="well col-xs-10 col-sm-10 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
@@ -241,24 +235,27 @@
 					                            <td class="col-md-1 text-center"><%= menu.getPrecio() %>€</td>
 					                            <td class="col-md-1 stext-center"><%= menu.getPrecio() %>€</td>
 					                        </tr>
-					                        
+
 					                        <tr>
 					                            <td>   </td>
 					                            <td>   </td>
 					                            <td class="text-right">
-					                            <p>
-					                                <strong>Subtotal: </strong>
-					                            </p>
-					                            <p>
-					                                <strong>IVA: </strong>
-					                            </p></td>
+						                            <p>
+						                                <strong>Subtotal: </strong>
+						                            </p>
+						                            <p>
+						                                <strong>IVA: </strong>
+						                            </p>
+					                            </td>
+
 					                            <td class="text-center">
-					                            <p>
-					                                <strong><%= sb %>€</strong>
-					                            </p>
-					                            <p>
-					                                <strong><%= iva %>€</strong>
-					                            </p></td>
+						                            <p>
+						                                <strong><%= sb %>€</strong>
+						                            </p>
+						                            <p>
+						                                <strong><%= iva %>€</strong>
+						                            </p>
+					                            </td>
 					                        </tr>
 					                        <tr>
 					                            <td>   </td>
@@ -268,88 +265,79 @@
 					                        </tr>
 					                    </tbody>
 					                </table>
-					                
+
 					                <div class="panel panel-default credit-card-box">
 						                <div class="panel-heading display-table" >
 						                    <div class="row display-tr" >
 						                        <h3 class="panel-title display-td" >Detalles del pago</h3>
-						                        <div class="display-td" >                            
+						                        <div class="display-td" >
 						                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
 						                        </div>
-						                    </div>                    
+						                    </div>
 						                </div>
 						                <div class="panel-body">
-						                    
-						                        <div class="row">
-						                            <div class="col-xs-12">
-						                                <div class="form-group">
-						                                    <label for="cardNumber">NÚMERO DE TARJETA</label>
-						                                    <div class="input-group">
-						                                        <input 
-						                                            type="tel"
-						                                            class="form-control"
-						                                            name="cardNumber"
-						                                            placeholder="Número de tarjeta válido"
-						                                            autocomplete="cc-number"
-						                                            required autofocus 
-						                                        />
-						                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-						                                    </div>
-						                                </div>                            
-						                            </div>
-						                        </div>
-						                        <div class="row">
-						                            <div class="col-xs-7 col-md-7">
-						                                <div class="form-group">
-						                                    <label for="cardExpiry"><span class="hidden-xs">FECHA</span><span class="visible-xs-inline">FECHA</span> DE EXPIRACIÓN</label>
-						                                    <input 
-						                                        type="tel" 
-						                                        class="form-control" 
-						                                        name="cardExpiry"
-						                                        placeholder="MM / AA"
-						                                        autocomplete="cc-exp"
-						                                        required 
-						                                    />
-						                                </div>
-						                            </div>
-						                            <div class="col-xs-5 col-md-5 pull-right">
-						                                <div class="form-group">
-						                                    <label for="cardCVC">CÓDIGO CV</label>
-						                                    <input 
-						                                        type="tel" 
-						                                        class="form-control"
-						                                        name="cardCVC"
-						                                        placeholder="CVC"
-						                                        autocomplete="cc-csc"
-						                                        required
-						                                    />
-						                                </div>
-						                            </div>
-						                        </div>
-						                        
-						                        
-						                        <div class="row" style="display:none;">
-						                            <div class="col-xs-12">
-						                                <p class="payment-errors"></p>
-						                            </div>
-						                        </div>
-						                    
+					                        <div class="row">
+					                            <div class="col-xs-12">
+					                                <div class="form-group">
+					                                    <label for="cardNumber">NÚMERO DE TARJETA</label>
+					                                    <div class="input-group">
+					                                        <input
+					                                            type="tel"
+					                                            class="form-control"
+					                                            name="cardNumber"
+					                                            placeholder="Número de tarjeta válido"
+					                                            autocomplete="cc-number"
+					                                            required autofocus 
+					                                        />
+					                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>
+					                        <div class="row">
+					                            <div class="col-xs-7 col-md-7">
+					                                <div class="form-group">
+					                                    <label for="cardExpiry"><span class="hidden-xs">FECHA</span><span class="visible-xs-inline">FECHA</span> DE EXPIRACIÓN</label>
+					                                    <input
+					                                        type="tel"
+					                                        class="form-control"
+					                                        name="cardExpiry"
+					                                        placeholder="MM / AA"
+					                                        autocomplete="cc-exp"
+					                                        required
+					                                    />
+					                                </div>
+					                            </div>
+					                            <div class="col-xs-5 col-md-5 pull-right">
+					                                <div class="form-group">
+					                                    <label for="cardCVC">CÓDIGO CV</label>
+					                                    <input
+					                                        type="tel"
+					                                        class="form-control"
+					                                        name="cardCVC"
+					                                        placeholder="CVC"
+					                                        autocomplete="cc-csc"
+					                                        required
+					                                    />
+					                                </div>
+					                            </div>
+					                        </div>
+
+					                        <div class="row" style="display:none;">
+					                            <div class="col-xs-12">
+					                                <p class="payment-errors"></p>
+					                            </div>
+					                        </div>
 						                </div>
-						            </div>            
+						            </div>
 						            <!-- CREDIT CARD FORM ENDS HERE -->
 					                <form action="/reservaMenu" method="post">
 									    <input type="submit" class="btn btn-success btn-lg btn-block" value="Pagar y reservar" />
 									</form>
-					                
-					                
 					            </div>
 					        </div>
 					    </div>
-					
-						
-						
-						
-						
+					</div>
 				</div>
 			</div>
 		</div>
@@ -358,15 +346,15 @@
 		<jsp:include page="../footer/footer.jsp"/>
 	<script>
 		$(function(){
-		
-			$('#slide-submenu').on('click',function() {			        
+
+			$('#slide-submenu').on('click',function() {
 		        $(this).closest('.list-group').fadeOut('slide',function(){
-		        	$('.mini-submenu').fadeIn();	
+		        	$('.mini-submenu').fadeIn();
 		        });
-		        
+
 		      });
-		
-			$('.mini-submenu').on('click',function(){		
+
+			$('.mini-submenu').on('click',function(){
 		        $(this).next('.list-group').toggle('slide');
 		        $('.mini-submenu').hide();
 			})

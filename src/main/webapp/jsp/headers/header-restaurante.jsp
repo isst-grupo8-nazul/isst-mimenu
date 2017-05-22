@@ -37,10 +37,10 @@
                             <ul id="menu-rest" class="dropdown-menu">
                                 <!-- Aquí iran las opciones del usuario y el botón para desconectarse -->
                                 <li>
-                                    <a href="/showMenusRest"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
+                                    <a href="/login"><i class="fa fa-user-o fa-fw" aria-hidden="true"></i>&nbsp;Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/ajustes"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Mis Ajustes</a>
+                                    <a href="/showMenusRest"><i class="fa fa-cutlery fa-fw" aria-hidden="true"></i>&nbsp;Mis Menús</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
@@ -50,7 +50,7 @@
                         </li>
 
                         <li>
-                            <a href="/ayuda">Ayuda</a>
+                            <a href="/">Ayuda</a>
                         </li>
                     </ul>
                 </div><!--/.nav-collapse -->

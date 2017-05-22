@@ -1,7 +1,7 @@
 package es.upm.dit.isst.mimenu;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,7 +39,7 @@ public class RegistrarMenuSevlet extends HttpServlet {
 			RequestDispatcher view = req.getRequestDispatcher("jsp/restaurante/publicarMenu.jsp");
 			view.forward(req, res);
 		}else{
-			res.sendRedirect("/");
+			res.sendRedirect("/login");
 		}
 	}
 	
@@ -72,13 +72,13 @@ public class RegistrarMenuSevlet extends HttpServlet {
 				platosDao.create(null, menu.getId(), rest.getEmail(), plato[0], plato[1], plato[2]);
 			}
 			
+			List<MENU> menus = menuDao.readByRest(rest.getEmail());
+			
 			res.sendRedirect("/showMenusRest");
 
 		}else{
-			res.sendRedirect("/loginrest");
+			res.sendRedirect("/login");
 		}
-		
-		
 	}
 
 }

@@ -5,6 +5,11 @@
 	#5BB256 Verde
 */
 
+body{
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+}
+
 /* #####################################################################
    #
    #   CSS para la Parte del navegador de arriba
@@ -252,6 +257,22 @@ nav .container-fuid {
    #   Css para la ficha de restaurante
    #
    ##################################################################### */
+.container-pad {
+    padding: 30px 15px;
+}
+
+/**** MODULE ****/
+.bgc-fff {
+    background-color: #fff!important;
+}
+.box-shad {
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+}
+.brdr {
+    border: 1px solid #ededed;
+}
+
 .destacados {
 	padding: 30px;
 }

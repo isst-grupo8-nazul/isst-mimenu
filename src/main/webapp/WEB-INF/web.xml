@@ -151,6 +151,18 @@
     <servlet-name>ActualizarRESTServlet</servlet-name>
     <url-pattern>/actualizarRestaurante</url-pattern>
   </servlet-mapping>
+  
+   <!-- Servlet para actualizar un comensal -->
+  <servlet>
+    <description></description>
+    <display-name>ActualizarComensalServlet</display-name>
+    <servlet-name>ActualizarComensalServlet</servlet-name>
+    <servlet-class>es.upm.dit.isst.mimenu.ActualizarComensalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActualizarComensalServlet</servlet-name>
+    <url-pattern>/actualizarComensal</url-pattern>
+  </servlet-mapping>
 
 
 </web-app>
